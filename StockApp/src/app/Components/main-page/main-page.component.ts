@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class MainPageComponent {
 
+  public companyArray: string[] = ["PKN ORLEN", "XTB"];
+  public selectedMedia: any;
+
+  constructor() { }
+
+  changeCompany() {
+    console.log(this.selectedMedia)
+  }
+
 }
