@@ -41,8 +41,15 @@
 
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
-                    <h3>Średnia krocząca</h3>
-                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                    <h3>Wczytaj plik CSV</h3>
+                    <!-- <button (click)="dowloadCSV()">Wczytaj</button> -->
+
+
+                    <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)"
+                        accept=".csv" />
+
+
+
                 </article>
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
