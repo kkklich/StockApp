@@ -1,21 +1,87 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
+import { stockData } from '../Models/Interfaces/Stock-model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoadCSVService {
+  private records: stockData[] = [];
+  @ViewChild('csvReader') csvReader: any;
 
-  private covidData: string = 'https://www.cdc.gov/coronavirus/2019-ncov/map-data-cases.csv';
+  constructor() { }
 
-  constructor(private http: HttpClient) { }
+  public uploadDocument($event: any): Promise<stockData[]> {
+    return new Promise((resolve, reject) => {
+      const files = $event.srcElement.files;
+      this.records = [];
 
-  public async getInfo() {
-    const xd = await this.http.get(this.covidData, { responseType: 'text' });
-    console.log(xd);
+      if (this.isValidCSVFile(files[0])) {
+        let input = $event.target;
+        const reader = new FileReader();
+        reader.readAsText(input.files[0]);
 
-    return xd;
+        reader.onload = async () => {
+          try {
+            let csvData = reader.result;
+            let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
+            let headersRow = this.getHeaderArray(csvRecordsArray);
+
+            this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+            resolve(this.records);
+          } catch (err) {
+            reject([]);
+          }
+        };
+
+        reader.onerror = function () {
+          console.log('error is occured while reading file!');
+          reject([]);
+        };
+
+      } else {
+        alert("Please import valid .csv file.");
+        this.fileReset();
+      }
+    })
   }
 
+
+  getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any): any[] {
+    let stockArray: any[] = [];
+
+    for (let i = 1; i < csvRecordsArray.length; i++) {
+      let curruntRecord = (<string>csvRecordsArray[i]).split(',');
+      if (curruntRecord.length == headerLength) {
+        const csvRecord = {
+          date: new Date(curruntRecord[0].trim()),
+          open: Number(curruntRecord[1].trim()),
+          high: Number(curruntRecord[2].trim()),
+          low: Number(curruntRecord[3].trim()),
+          close: Number(curruntRecord[4].trim()),
+          volumen: Number(curruntRecord[5].trim())
+        };
+        stockArray.push(csvRecord);
+      }
+    }
+    return stockArray;
+  }
+
+  isValidCSVFile(file: any) {
+    return file.name.endsWith(".csv");
+  }
+
+  getHeaderArray(csvRecordsArr: any) {
+    let headers = (<string>csvRecordsArr[0]).split(',');
+    let headerArray = [];
+    for (let j = 0; j < headers.length; j++) {
+      headerArray.push(headers[j]);
+    }
+    return headerArray;
+  }
+
+  fileReset() {
+    this.csvReader.nativeElement.value = "";
+    this.records = [];
+  }
 }

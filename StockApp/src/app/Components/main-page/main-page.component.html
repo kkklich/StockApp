@@ -31,35 +31,28 @@
         <section id="two">
             <h2>Wskaźniki</h2>
             <div class="row">
-                <mat-label>Wybierz spółkę</mat-label>
-                <mat-select class="select-companies" (selectionChange)="changeCompany()" [(ngModel)]="selectedMedia"
-                    name="company">
+                <!-- <mat-label>Wybierz spółkę</mat-label>
+                <mat-select class="select-companies" [(ngModel)]="selectedMedia" name="company">
                     <mat-option disabled selected>Wybierz spółkę</mat-option>
                     <mat-option *ngFor="let company of companyArray" [value]="company">{{company.name}}</mat-option>
                 </mat-select>
-                <input type="text" [(ngModel)]="selectedMedia.symbol" />
+                <input type="text" [(ngModel)]="selectedMedia.symbol" /> -->
 
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
                     <h3>Wczytaj plik CSV</h3>
-                    <!-- <button (click)="dowloadCSV()">Wczytaj</button> -->
-
-
-                    <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadListener($event)"
+                    <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="dowloadCSV($event)"
                         accept=".csv" />
-
-
-
                 </article>
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
                     <h3>Ważona średnia krocząca</h3>
-                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                    <p>Srednią ważoną kroczącą jest ....</p>
                 </article>
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
                     <h3>Przecięcia średnich ważonych</h3>
-                    <p>Lorem ipsum dolor sit amet nisl sed nullam feugiat.</p>
+                    <p>Przecięcia średnich ważonych to...</p>
                 </article>
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
@@ -81,9 +74,8 @@
 
         <!-- Three -->
         <section id="three">
-            <h2>Get In Touch</h2>
-            <p>Accumsan pellentesque commodo blandit enim arcu non at amet id arcu magna. Accumsan orci faucibus id eu
-                lorem semper nunc nisi lorem vulputate lorem neque lorem ipsum dolor.</p>
+            <h2>Skontaktuj się ze mną</h2>
+            <p>Zapraszam do kontaktu</p>
             <div class="row">
                 <div class="col-8 col-12-small">
                     <form method="post" action="#">
