@@ -8,11 +8,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadCSVService } from './Services/load-csv.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ChartComponent } from './Components/chart/chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent
+    MainPageComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
