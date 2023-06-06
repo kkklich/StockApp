@@ -20,7 +20,7 @@ export class MainPageComponent {
   public dowloadCSV(event: any) {
     this.loadCSV.uploadDocument(event).then(res => {
       this.records = res;
-      console.log(res);
+      // console.log(res);
     });
   }
 }

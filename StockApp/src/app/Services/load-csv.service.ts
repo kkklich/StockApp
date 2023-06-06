@@ -1,5 +1,6 @@
 import { Injectable, ViewChild } from '@angular/core';
 import { stockData } from '../Models/Interfaces/Stock-model';
+import { Observable, Subject, Subscription } from 'rxjs';
 
 
 @Injectable({
@@ -7,9 +8,14 @@ import { stockData } from '../Models/Interfaces/Stock-model';
 })
 export class LoadCSVService {
   private records: stockData[] = [];
+  private recordsSubscription: Subject<stockData[]> = new Subject();
   @ViewChild('csvReader') csvReader: any;
 
   constructor() { }
+
+  public getRecordsSubscribe(): Observable<stockData[]> {
+    return this.recordsSubscription;
+  }
 
   public uploadDocument($event: any): Promise<stockData[]> {
     return new Promise((resolve, reject) => {
@@ -28,6 +34,7 @@ export class LoadCSVService {
             let headersRow = this.getHeaderArray(csvRecordsArray);
 
             this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+            this.recordsSubscription.next(this.records);
             resolve(this.records);
           } catch (err) {
             reject([]);
@@ -53,7 +60,7 @@ export class LoadCSVService {
     for (let i = 1; i < csvRecordsArray.length; i++) {
       let curruntRecord = (<string>csvRecordsArray[i]).split(',');
       if (curruntRecord.length == headerLength) {
-        const csvRecord = {
+        const csvRecord: stockData = {
           date: new Date(curruntRecord[0].trim()),
           open: Number(curruntRecord[1].trim()),
           high: Number(curruntRecord[2].trim()),
