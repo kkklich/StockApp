@@ -8,6 +8,8 @@ import { Observable, Subject, Subscription } from 'rxjs';
 })
 export class LoadCSVService {
   private records: stockData[] = [];
+  public fileTitle: string = '';
+
   private recordsSubscription: Subject<stockData[]> = new Subject();
   @ViewChild('csvReader') csvReader: any;
 
@@ -15,6 +17,10 @@ export class LoadCSVService {
 
   public getRecordsSubscribe(): Observable<stockData[]> {
     return this.recordsSubscription;
+  }
+
+  public getRecords(): stockData[] {
+    return this.records;
   }
 
   public uploadDocument($event: any): Promise<stockData[]> {
@@ -27,6 +33,7 @@ export class LoadCSVService {
         const reader = new FileReader();
         reader.readAsText(input.files[0]);
 
+        this.fileTitle = input.files[0].name;
         reader.onload = async () => {
           try {
             let csvData = reader.result;
