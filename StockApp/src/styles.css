@@ -2698,7 +2698,6 @@ input[type="button"]:disabled,
     justify-content: space-between;
     background-color: #1f1815;
     background-attachment: scroll, scroll;
-    /* background-image: url("images/overlay.png"), url("../../images/bg.jpg"); */
     background-position: top left, top left;
     background-repeat: repeat, no-repeat;
     background-size: auto, 150%;
@@ -2709,7 +2708,6 @@ input[type="button"]:disabled,
     position: fixed;
     text-align: right;
     top: 0;
-    width: 35%;
 }
 
 #header>* {
@@ -3338,5 +3336,13 @@ body.is-touch .poptrox-popup .closer {
     }
 
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
