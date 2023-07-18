@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadCSVService } from './Services/load-csv.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartComponent } from './Components/chart/chart.component';
+import { PatternService } from './Services/pattern.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ChartComponent } from './Components/chart/chart.component';
     HttpClientModule
   ],
   providers: [
-    LoadCSVService
+    LoadCSVService,
+    PatternService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,8 +1,8 @@
 export interface stockData {
     date: Date;
-    open: Number;
-    high: Number;
-    low: Number;
-    close: Number;
-    volumen: Number
+    open: number;
+    high: number;
+    low: number;
+    close: number;
+    volumen: number
 }
