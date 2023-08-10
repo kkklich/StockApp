@@ -1,3 +1,21 @@
 <div id="chart-wrapper">
+    <div class="select-container" *ngIf="chart">
+        <div class="dropdown-container">
+            <mat-form-field>
+                <mat-label>Wybierz długość</mat-label>
+                <mat-select [(ngModel)]="lengthChartSMA" (selectionChange)="applyChart()">
+                    <mat-option *ngFor="let length of lengthArray" [value]="length">{{length}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="dropdown-container">
+            <mat-form-field>
+                <mat-label>Wybierz czas notowań</mat-label>
+                <mat-select [(ngModel)]="quantityOfStockValue" (selectionChange)="applyChart()">
+                    <mat-option *ngFor="let time of timeStock" [value]="time.numberOfDays">{{time.time}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
     <canvas id="chart"></canvas>
 </div>
