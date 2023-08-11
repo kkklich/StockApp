@@ -22,6 +22,7 @@ export class ChartComponent implements OnInit {
   private averageRolling: any[] = [];
   public lengthArray: number[] = [10, 20, 30, 50];
   public lengthChartSMA: number = 10;
+  public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
   private loadedStockData: stockData[] = [];
 
   constructor(private loadCSVService: LoadCSVService,
@@ -38,25 +39,27 @@ export class ChartComponent implements OnInit {
     })
   }
 
-  private calculatePattern() {
-    this.averageRolling = this.patternService.calculateAverageRolling(this.stockValueArray, this.lengthChartSMA);
-    this.averageRolling.unshift(...new Array(this.lengthChartSMA).fill(null));
+  private calculatePattern(lengthSMA: number): number[] {
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
+    sma.unshift(...new Array(lengthSMA).fill(null));
+
+    return sma;
   }
 
   private createLineChart(): void {
+    const nameLine = "SMA " + this.lengthChartSMA;
+    const fileName = this.loadCSVService.fileTitle;
+
     if (this.chart != undefined)
       this.chart.destroy();
 
-    const nameLine = "SMA " + this.lengthChartSMA;
-
-    const fileName = this.loadCSVService.fileTitle;
     this.chart = new Chart("chart", {
       type: 'line',
       data: {
         labels: this.dateTimeArray,
         datasets: [{
           label: fileName,
-          data: this.stockValueArray,
+          data: this.stockValueArray
         },
         {
           label: nameLine,
@@ -80,23 +83,52 @@ export class ChartComponent implements OnInit {
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
 
-    this.calculatePattern();
+    this.averageRolling = this.calculatePattern(this.lengthChartSMA);
     this.createLineChart();
+  }
+
+  public updateChart(lineChart: any) {
+    if (lineChart.length < 1)
+      return;
+    const line = this.chart.data.datasets.find((x: any) => x.label == lineChart.name)
+    if (line === undefined)
+      return;
+
+    const dataChart = this.calculatePattern(lineChart.length);
+    line.data = dataChart;
+
+    this.chart.update();
   }
 
   public addSMA() {
     if (this.chart === undefined)
       return;
+    const lengthSMA = 20;
+    this.linesArray.push({ length: lengthSMA, name: 'SMA ' + lengthSMA })
+    const dataChart = this.calculatePattern(lengthSMA);
 
-    const xd = this.averageRolling.map(x => x * 2);
     this.chart.data.datasets.push({
-      label: "sdfsdf",
-      data: xd,
+      label: "SMA " + lengthSMA,
+      data: dataChart
     });
 
     this.chart.update();
 
+  }
 
+  public changeDateChart() {
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
+    this.stockValueArray = dataStock.map(x => x.close);
+
+    this.chart.data.labels = this.dateTimeArray;
+    this.chart.data.datasets[0].data = this.stockValueArray;
+
+    for (let line of this.linesArray) {
+      this.updateChart(line);
+    }
+
+    this.chart.update();
   }
 
 }
