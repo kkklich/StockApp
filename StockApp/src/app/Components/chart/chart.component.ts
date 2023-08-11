@@ -11,6 +11,7 @@ import { PatternService } from 'src/app/Services/pattern.service';
 })
 export class ChartComponent implements OnInit {
 
+  public value = "text";
   public timeStock: { time: string, numberOfDays: number }[] = [{ time: '1M', numberOfDays: 20 }, { time: '2M', numberOfDays: 40 }, { time: '3M', numberOfDays: 60 }, { time: '6M', numberOfDays: 120 }, { time: '1R', numberOfDays: 240 }, { time: '3R', numberOfDays: 720 }, { time: 'MAX', numberOfDays: 99999 }];
   public quantityOfStockValue = this.timeStock[1].numberOfDays;
   public chart: any;
@@ -37,20 +38,10 @@ export class ChartComponent implements OnInit {
     })
   }
 
-  public applyChart() {
-    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
-    this.stockValueArray = dataStock.map(x => x.close);
-
-    this.calculatePattern();
-    this.createLineChart();
-  }
-
   private calculatePattern() {
     this.averageRolling = this.patternService.calculateAverageRolling(this.stockValueArray, this.lengthChartSMA);
     this.averageRolling.unshift(...new Array(this.lengthChartSMA).fill(null));
   }
-
 
   private createLineChart(): void {
     if (this.chart != undefined)
@@ -70,7 +61,8 @@ export class ChartComponent implements OnInit {
         {
           label: nameLine,
           data: this.averageRolling,
-        }],
+        }
+        ],
       },
       options: {
         responsive: true,
@@ -82,5 +74,30 @@ export class ChartComponent implements OnInit {
       }
     });
   }
+
+  public applyChart() {
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
+    this.stockValueArray = dataStock.map(x => x.close);
+
+    this.calculatePattern();
+    this.createLineChart();
+  }
+
+  public addSMA() {
+    if (this.chart === undefined)
+      return;
+
+    const xd = this.averageRolling.map(x => x * 2);
+    this.chart.data.datasets.push({
+      label: "sdfsdf",
+      data: xd,
+    });
+
+    this.chart.update();
+
+
+  }
+
 }
 
