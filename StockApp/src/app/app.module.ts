@@ -9,6 +9,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoadCSVService } from './Services/load-csv.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ChartComponent } from './Components/chart/chart.component';
+import { PatternService } from './Services/pattern.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -22,10 +26,15 @@ import { ChartComponent } from './Components/chart/chart.component';
     FormsModule,
     MatSelectModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule
   ],
   providers: [
-    LoadCSVService
+    LoadCSVService,
+    PatternService
   ],
   bootstrap: [AppComponent]
 })

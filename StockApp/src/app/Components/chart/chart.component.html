@@ -1,3 +1,27 @@
 <div id="chart-wrapper">
+    <div class="select-container" *ngIf="chart">
+        <div class="dropdown-container">
+
+            <mat-form-field>
+                <mat-label>Wybierz czas notowań: </mat-label>
+                <mat-select [(ngModel)]="quantityOfStockValue" (selectionChange)="changeDateChart()">
+                    <mat-option *ngFor="let time of timeStock" [value]="time.numberOfDays">{{time.time}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+
+            <div *ngFor="let lineChart of linesArray; let i = index">
+                <mat-form-field class="example-form-field">
+                    <mat-label>Wybierz długość SMA {{i}}</mat-label>
+                    <input matInput type="number" min="1" [(ngModel)]="lineChart.length"
+                        (change)="updateChart(lineChart)">
+                </mat-form-field>
+                <br>
+            </div>
+
+            <mat-icon (click)="addSMA()">add</mat-icon>
+
+        </div>
+    </div>
     <canvas id="chart"></canvas>
 </div>
