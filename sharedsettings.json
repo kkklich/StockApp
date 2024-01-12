@@ -1,0 +1,69 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    },
+    "GELF": {
+      "Host": "192.168.10.120",
+      "LogSource": "XanthosProd",
+      "LogLevel": {
+        "Default": "Trace"
+      }
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DatabaseAppstation": "Host=localhost;Port=5432;Database=snel;Username=snel;Password=%^E@6urr5Wq&",
+    "DatabaseDocumentDistribution": "Host=localhost;Port=5432;Database=snel;Username=snel;Password=%^E@6urr5Wq&",
+    "DatabaseUsers": "Host=localhost;Port=5432;Database=snel;Username=snel;Password=%^E@6urr5Wq&",
+    "DatabaseRestApi": "Host=localhost;Port=5432;Database=snel;Username=snel;Password=%^E@6urr5Wq&"
+  },
+  "TokenConfiguration": {
+    "ExpiryTimeInMinutes": 44640,
+    "JwtKey": "5dVnDFptHc1dA6J@2jxVqMpwndxlrhsaQ4ZvfLAqXdUB1!^riA17T5u0J60irvh@Z4jbCQ",
+    "Issuer": "Issuer",
+    "Audience": "Audience",
+    "TokenValidationConfiguration": {
+      "ValidateIssuer": false,
+      "ValidateAudience": false,
+      "ValidateLifetime": true,
+      "ValidIssuer": "ValidIssuer",
+      "ValidAudience": "ValidIssuer",
+      "ValidateIssuerSigningKey": true
+    }
+  },
+  "Redis": {
+    "ConnectionStrings": {
+      "Tokens": "localhost"
+    }
+  },
+  "ApplicationsUrls": {
+    "UsersApi": "http://localhost:51500",
+    "AppstationApi": "http://localhost:60356",
+    "AppstationClientApp": "http://localhost:4200"
+  },
+  "EmailClientConfiguration": {
+    "SmtpServer": "netsoftware.pl",
+    "SmtpPort": 587,
+    "SmtpUsername": "noreplay@netsoftware.pl",
+    "SmtpPassword": "sQVMYsb7m8Pd",
+    "PopServer": "",
+    "PopPort": 0,
+    "PopUsername": "",
+    "PopPassword": "",
+    "SenderName": "Snelbouwloods",
+    "SenderEmail": "noreplay@netsoftware.pl",
+    "SenderRegisterEmail": "noreplay@netsoftware.pl",
+    "SenderRegisterPassword": "sQVMYsb7m8Pd",
+    "TLS": false
+  },
+  "SecureUrlGeneratorConfiguration": {
+    "ProtectorApplicationName": "nestoya-dds",
+    "PersistKeysToFileSystem": "../common/Netsoftware.Xanthos.Common.SecureUrlGenerator/",
+    "KeyCertificateFileName": "../common/Netsoftware.Xanthos.Common.SecureUrlGenerator/dev_pfx.pfx",
+    "KeyCertificatePassword": "devsecret"
+  },
+  "UploadedFilesDirectory": "/UploadedFiles",
+  "FileStorageJwtKey": "dam23fXs2XcftruQw23DfhMc1dA6J@2jxVljk23asndxlrhsaQ4ZvfLAq",
+  "RunBackgroundTasks": "true"
+}

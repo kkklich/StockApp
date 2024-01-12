@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\common\Netsoftware.Xanthos.Common.HttpClient\Netsoftware.Xanthos.Common.HttpClient.csproj" />
+    <ProjectReference Include="..\Netsoftware.Xanthos.ApplicationInstance.Database\Netsoftware.Xanthos.ApplicationInstance.Database.csproj" />
+    <ProjectReference Include="..\Netsoftware.Xanthos.Database\Netsoftware.Xanthos.Database.csproj" />
+  </ItemGroup>
+
+</Project>

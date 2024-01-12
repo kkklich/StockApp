@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\common\Netsoftware.Xanthos.Common.EmailSender\Netsoftware.Xanthos.Common.EmailSender.csproj" />
+    <ProjectReference Include="..\common\Netsoftware.Xanthos.Common.Resources\Netsoftware.Xanthos.Common.Resources.csproj" />
+  </ItemGroup>
+
+</Project>
