@@ -13,6 +13,7 @@ import { PatternService } from './Services/pattern.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ApiHttpService } from './Services/api-http.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MatInputModule } from '@angular/material/input';
   ],
   providers: [
     LoadCSVService,
-    PatternService
+    PatternService,
+    ApiHttpService
   ],
   bootstrap: [AppComponent]
 })
