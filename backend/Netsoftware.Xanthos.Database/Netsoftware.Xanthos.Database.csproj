@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200929092006_Create_ApplicationInstances_table.cs" />
+    <Compile Remove="Migrations\20200929092006_Create_ApplicationInstances_table.Designer.cs" />
+    <Compile Remove="Migrations\20201015080758_remove-AppId-column.cs" />
+    <Compile Remove="Migrations\20201015080758_remove-AppId-column.Designer.cs" />
+    <Compile Remove="Migrations\20220704101114_add-Department-Table.cs" />
+    <Compile Remove="Migrations\20220704101114_add-Department-Table.Designer.cs" />
+    <Compile Remove="Migrations\20220916072126_add-DiscountDepartmentsModel.cs" />
+    <Compile Remove="Migrations\20220916072126_add-DiscountDepartmentsModel.Designer.cs" />
+    <Compile Remove="Migrations\20220907180537_add-Image-ProductModel.cs" />
+    <Compile Remove="Migrations\20220907180537_add-Image-ProductModel.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="6.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\common\Netsoftware.Xanthos.Common.Resources\Netsoftware.Xanthos.Common.Resources.csproj" />
+    <ProjectReference Include="..\Netsoftware.Xanthos.ApplicationInstance.Database\Netsoftware.Xanthos.ApplicationInstance.Database.csproj" />
+    <ProjectReference Include="..\Netsoftware.Xanthos.EmailQueue.Database\Netsoftware.Xanthos.EmailQueue.Database.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
+</Project>

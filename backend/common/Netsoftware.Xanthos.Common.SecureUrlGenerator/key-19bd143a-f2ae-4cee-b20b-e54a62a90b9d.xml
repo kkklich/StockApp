@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<key id="19bd143a-f2ae-4cee-b20b-e54a62a90b9d" version="1">
+	<creationDate>2020-11-19T14:53:08.299917Z</creationDate>
+	<activationDate>2020-11-19T14:53:08.2613686Z</activationDate>
+	<expirationDate>2021-02-17T14:53:08.2613686Z</expirationDate>
+	<descriptor
+		deserializerType="Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel.AuthenticatedEncryptorDescriptorDeserializer, Microsoft.AspNetCore.DataProtection, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+		<descriptor>
+			<encryption algorithm="AES_256_CBC" />
+			<validation algorithm="HMACSHA256" />
+			<encryptedSecret
+				decryptorType="Microsoft.AspNetCore.DataProtection.XmlEncryption.EncryptedXmlDecryptor, Microsoft.AspNetCore.DataProtection, Version=3.1.10.0, Culture=neutral, PublicKeyToken=adb9793829ddae60"
+				xmlns="http://schemas.asp.net/2015/03/dataProtection">
+				<EncryptedData Type="http://www.w3.org/2001/04/xmlenc#Element" xmlns="http://www.w3.org/2001/04/xmlenc#">
+					<EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#aes256-cbc" />
+					<KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+						<EncryptedKey xmlns="http://www.w3.org/2001/04/xmlenc#">
+							<EncryptionMethod Algorithm="http://www.w3.org/2001/04/xmlenc#rsa-1_5" />
+							<KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+								<X509Data>
+									<X509Certificate>MIIFZTCCA02gAwIBAgIUbC8en2H6YB6gqWEMvOteqBiW/L8wDQYJKoZIhvcNAQELBQAwQjELMAkGA1UEBhMCUEwxFTATBgNVBAcMDERlZmF1bHQgQ2l0eTEcMBoGA1UECgwTRGVmYXVsdCBDb21wYW55IEx0ZDAeFw0yMDExMTkxMDE0NTJaFw0yMDEyMTkxMDE0NTJaMEIxCzAJBgNVBAYTAlBMMRUwEwYDVQQHDAxEZWZhdWx0IENpdHkxHDAaBgNVBAoME0RlZmF1bHQgQ29tcGFueSBMdGQwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQC5DGwzRSdtHDHh2+oTmEgYJKjeFwvK+yCrHfpoj/TMJ2XFFzQTijU1iql70Ext8JC7HER2uWEilTtwdDKuvIUS3Z6TiUT4MkE8bp273TZRGyTWUrryDrN9JcReCHy+We0BZFkkuV5sWXFtuBpefNJZPSzs4+Qx8kZnH1bbThIN0yAr4dnMsnWs3VhtqWE6ot4a2GR3N3ZNkt3tf4XZ2nNgF/3DTPXufrf9xO/L1ydL9JQS7/X1usOg13SCXqpeBQXeKp7BKrVYNU0pSXjPsDNYndYQsmmT6oNl0xzG0D7mt+y8nWWRp5oWeXo8u0/JYLH6A4/3Q8qhjf7oFb01GPVFIZ//Brf33V7Z/CWiU2uPskCxdnRpr9kZcycHCS9UUHx9gOT+wGhujD2rH/6fkILavyIoDOaPOzmLvWHtPOpA44EqNoeZHNB+jL2fGcdXwRFjvcXDcMcJ4FJYnI2R5WCmdW9L57v1VoFGR4tmUidRGSvtiJ9DUiP4lVJOM8lxKtIkCFb3GTuLE5GEVvqMN7OxDaxilhJHRSzGN8dq+NkKyTS2EGKwKYw7jnyzzknlIcFOefbPbz/PvQMuXVsHicsoQvs3e75/vf1CInpL82RL7P2skTwAeBTI5jGiOLc2biIigwMFpswDuiAHVwBuk86INN0FdadkJcPIN6g3dxM/hwIDAQABo1MwUTAdBgNVHQ4EFgQUVglAe2/C5fDOz1FR6f6l9U+CxWkwHwYDVR0jBBgwFoAUVglAe2/C5fDOz1FR6f6l9U+CxWkwDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAgEAHaB5wY1SJJ1PRjbzpJl0D7YMOUXCmhcQw9g1O5e0OFiAYGxE2hWMDpYGciRjiGtQf+Ny1V4ov08zK8+Ne7zO7Munxt1aIWufRk2fY3D/HokovnAoFUEqMdAPvxtdpDA4bEEnJTTTIUmYdkc0Z/9716nnxJCC91Acwz7/BTUckCIF+PUALzmvkv7ENmcb8LT8UWNxslaHLf+lau7BMEpq1pWFU69DCjAttWIKktYldqwUtTmdfWlpUQFlt3E1s+8q8myGDux/516Yyv0o0txtsBLacI2EHwTJGCaGd8AknRcMaFI3ZQqmroKidPXwe7Zh2yLcY6JX/Jdz12uHimIrBKa5OGrpMydKELs4k+R2nvYeyp+hKewI2FmEXlCPZDNFR+rxmf3Ja8PsFZmQBaQKuTKkwNrp9U2bYULvrMlEkVTF/ZfCG6aiAJcm8kzYc9mGtjneB2CPOhU+0MgRFsUE+5JGzXAxxD8+NtrTrctTMAjRebKD1X5qMNPtu9jHdEfZpogYzbPXbW9YERoktdCfIfXZbdiBDZkJywy6kDs3KrIQNFBMinK88dJ4ULCOPU4BbCU5cb1cG6DphbOzvs0c5odgJSwgU7w6NCzZCTL3W6zU/Agy4GiMrPWj+uiCfCprxd+7+Jv8kDQ335tu5rlLUyMlU7v3PEi4r74ss8Zqc/w=</X509Certificate>
+								</X509Data>
+							</KeyInfo>
+							<CipherData>
+								<CipherValue>LRVrluVvREsPitEbsT+7X3zddy5IxTLtGIgblc66nmAYGMIbgHH2ls0kzYGYrKdU9qD/rx9owOfzQhOLGM8kUNVpSZ/97htO+odH0Lcfoy1oi8HvZHX2btnEK8/HNtanyKJoZj0AUISVI4x/8U4zL3B7mW6oyNbDnz5n1PPipSWN5FMb762LYf92yd7Vp/VpKBTP3ormzo7in2j+G2scY7IbDzyk3vsx2Ety144hl2ZnZJgZnBsSacLsKHVNCbjvU4Pn6OICbSt17jAnqrZl+jA+ai5KUAz09XZkK42MP2fiHtX9VFHfolLw7buuzOEGE6KCCvZzjjC+Ds20ACD0zqd9WYKWs5MYIb8nsZV/3JQ2INfolimr9zNBem+bZS3Ou1GPctLZswu7ixvlOGkYYYqHJ81WAvswO87C2iGB481T3u/MC5hrXihQQNsVaJI+KcJpRNOtPxxgq4lbU2QgIdWIeOE/FG42bwsVppcDhuAsRNgUOVXTawKYmaeuDXyDv+sga+fEa3pwaycv62X9nfIZ5uYZspV4GIDplWhqBYSr8RuceBha3nUKVZchCCfY+Wk4xIvNBUkMxeyph04mx7/ikPcSbIhMsMs5fjPYzeMkW/RJpvp4u0mSB7wCKRKSvRVrYj7CuMgLYCIT1RWgEtJVFC65WmbDn6T+36y0i2Y=</CipherValue>
+							</CipherData>
+						</EncryptedKey>
+					</KeyInfo>
+					<CipherData>
+						<CipherValue>gopegXQG0LJ25xhVcsVBjTFeGd5YpMOhee07gKiWMAx7wjJ0C0sNSQnM/DKq8TphFWcHIS1gYCocCZnqYQqHZBPIc+1mkH8bya27WmBfTI2zr9zMLqdui4FOT7g3RI9lOidSsAfg8DcdwcGU+q+Al4GV3XS3f7BBwulU+sSGhYmr6n4On9aHDZYIMjzGu9riWzp4f8Way1VQVGXPK83VnyKF2kXawFSlBSGXdbPiH7oUd71fRWdLyFcZRVq5DrdtFdThCBhfYTlkEdbpBWKv5fk+GUk/iCKxh4kzxZEqymr5i9+kkZcn89gpTZrOnS88eq7Np8U+4/MeMpL7PuUhMBaXS6oYwYuFjmoi2Q2F1ORmVXKvnWEJRhKtGR3b+Xre2nch9u0tHuQOZGuiAku/vA==</CipherValue>
+					</CipherData>
+				</EncryptedData>
+			</encryptedSecret>
+		</descriptor>
+	</descriptor>
+</key>

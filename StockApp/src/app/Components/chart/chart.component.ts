@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { stockData } from 'src/app/Models/Interfaces/Stock-model';
+import { ApiHttpService } from 'src/app/Services/api-http.service';
 import { LoadCSVService } from 'src/app/Services/load-csv.service';
 import { PatternService } from 'src/app/Services/pattern.service';
+import { environment } from 'src/environments/environment.development';
 
 @Component({
   selector: 'app-chart',
@@ -26,7 +28,10 @@ export class ChartComponent implements OnInit {
   private loadedStockData: stockData[] = [];
 
   constructor(private loadCSVService: LoadCSVService,
-    private patternService: PatternService) { }
+    private patternService: PatternService,
+    private apiHttpService: ApiHttpService) {
+    this.getAPIRequest();
+  }
 
   ngOnInit(): void {
     this.loadData();
@@ -129,6 +134,12 @@ export class ChartComponent implements OnInit {
     }
 
     this.chart.update();
+  }
+
+  getAPIRequest() {
+    this.apiHttpService.get<any>(`${environment.apiUrl}version`).subscribe(result => {
+      console.log(result)
+    })
   }
 
 }

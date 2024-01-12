@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<doc>
+	<assembly>
+		<name>Netsoftware.Xanthos.Api</name>
+	</assembly>
+	<members>
+		<member
+			name="M:Netsoftware.Xanthos.Api.Controllers.ValuesController.TestEmail(Netsoftware.Xanthos.Common.EmailSender.EmailResource)">
+			<summary>
+				Example documentation comment for swagger
+			</summary>
+			<remarks>Example: Awesomeness!</remarks>
+			<response code="200">Example: Product created</response>
+			<response code="400">Example: Product has missing/invalid values</response>
+			<response code="500">Example: Oops! Can't create your product right now</response>
+		</member>
+	</members>
+</doc>

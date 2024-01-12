@@ -1,0 +1,167 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Api", "Netsoftware.Xanthos.Api\Netsoftware.Xanthos.Api.csproj", "{63F425CA-FEC0-44E3-B3AA-26E174E7064C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Database", "Netsoftware.Xanthos.Database\Netsoftware.Xanthos.Database.csproj", "{54D2AFF7-28C5-4282-AAED-244C908E967C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Infrastructure", "Netsoftware.Xanthos.Infrastructure\Netsoftware.Xanthos.Infrastructure.csproj", "{80285683-7669-4F6F-B31E-D1B472F425EA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{3026B867-11BF-465A-9E68-2CA1F9F18AD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.AuthenticationMiddleware", "common\Netsoftware.Xanthos.Common.CustomAuthenticationMiddleware\Netsoftware.Xanthos.Common.AuthenticationMiddleware.csproj", "{DC206CF6-BCA1-45D1-87EC-FB10F45223FA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.AuthorizationHeaderProviderMiddleware", "common\Netsoftware.Xanthos.Common.CustomAuthorizationHeaderProviderMiddleware\Netsoftware.Xanthos.Common.AuthorizationHeaderProviderMiddleware.csproj", "{7EFF2880-88F5-4F69-93B1-E2BAC2C35CB4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.EmailSender", "common\Netsoftware.Xanthos.Common.EmailSender\Netsoftware.Xanthos.Common.EmailSender.csproj", "{F5630B7C-05CE-4DD2-971F-2A775CBC4547}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.HttpClient", "common\Netsoftware.Xanthos.Common.HttpClient\Netsoftware.Xanthos.Common.HttpClient.csproj", "{F134A681-EF9D-4207-861E-A0B0CE09B762}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.Resources", "common\Netsoftware.Xanthos.Common.Resources\Netsoftware.Xanthos.Common.Resources.csproj", "{921ABD62-18D7-4187-9ED9-7D544B78E897}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.DatabaseConfiguration", "common\Netsoftware.Xanthos.Common.DatabaseConfiguration\Netsoftware.Xanthos.Common.DatabaseConfiguration.csproj", "{326FF8D5-BCEA-4D5A-BD2F-3EFBAB0846B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.Internationalities", "common\Netsoftware.Xanthos.Common.Internationalities\Netsoftware.Xanthos.Common.Internationalities.csproj", "{DD786210-D27E-4D78-AE48-D281C60E02FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApplicationInstance", "ApplicationInstance", "{DFC40E2B-7692-4AAE-8395-2853EF2670CE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.ApplicationInstance.Api", "Netsoftware.Xanthos.ApplicationInstance.Api\Netsoftware.Xanthos.ApplicationInstance.Api.csproj", "{12DD1FD6-C5FC-41F3-AE29-98BB6D9B9546}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.ApplicationInstance.Database", "Netsoftware.Xanthos.ApplicationInstance.Database\Netsoftware.Xanthos.ApplicationInstance.Database.csproj", "{8BC69E43-6FC7-4673-8079-77620FA13459}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.ApplicationInstance.Infrastructure", "Netsoftware.Xanthos.ApplicationInstance.Infrastructure\Netsoftware.Xanthos.ApplicationInstance.Infrastructure.csproj", "{B4B3579C-CE39-49AD-8621-47661DB14FE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmailQueue", "EmailQueue", "{A5ABB845-FD16-41D2-B2D4-86FCD099D03C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.EmailQueue.Api", "Netsoftware.Xanthos.EmailQueue.Api\Netsoftware.Xanthos.EmailQueue.Api.csproj", "{DFAF4EC3-1A98-4FD9-9949-FF4287A3AE8D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.EmailQueue.Database", "Netsoftware.Xanthos.EmailQueue.Database\Netsoftware.Xanthos.EmailQueue.Database.csproj", "{E33F89C1-2145-42EC-81D8-7B8DBAA64B45}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.EmailQueue.Infrastructure", "Netsoftware.Xanthos.EmailQueue.Infrastructure\Netsoftware.Xanthos.EmailQueue.Infrastructure.csproj", "{74EFC019-DB7A-4BDB-891D-7210806BC8D6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.EmailQueue.HostService", "Netsoftware.Xanthos.EmailQueue.HostService\Netsoftware.Xanthos.EmailQueue.HostService.csproj", "{D41A2957-19D7-4117-B611-0FDFAD524126}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.ProtoBuilder", "Netsoftware.Xanthos.ProtoBuilder\Netsoftware.Xanthos.ProtoBuilder.csproj", "{0240E95F-DE8D-440F-AF93-0302DE6BE26B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.GlobalErrorHandler", "common\Netsoftware.Xanthos.Common.GlobalErrorHandler\Netsoftware.Xanthos.Common.GlobalErrorHandler.csproj", "{8B09D6AA-1A97-4FE4-A4DA-2F243C945E1D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Netsoftware.Xanthos.Common.SecureUrlGenerator", "common\Netsoftware.Xanthos.Common.SecureUrlGenerator\Netsoftware.Xanthos.Common.SecureUrlGenerator.csproj", "{46A8D215-053D-47FF-BF86-2B6181053071}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementy rozwiązania", "Elementy rozwiązania", "{60F76DEA-6EE4-4FD3-84AD-78176637E53F}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63F425CA-FEC0-44E3-B3AA-26E174E7064C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63F425CA-FEC0-44E3-B3AA-26E174E7064C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63F425CA-FEC0-44E3-B3AA-26E174E7064C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63F425CA-FEC0-44E3-B3AA-26E174E7064C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54D2AFF7-28C5-4282-AAED-244C908E967C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54D2AFF7-28C5-4282-AAED-244C908E967C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54D2AFF7-28C5-4282-AAED-244C908E967C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54D2AFF7-28C5-4282-AAED-244C908E967C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80285683-7669-4F6F-B31E-D1B472F425EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80285683-7669-4F6F-B31E-D1B472F425EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80285683-7669-4F6F-B31E-D1B472F425EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80285683-7669-4F6F-B31E-D1B472F425EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC206CF6-BCA1-45D1-87EC-FB10F45223FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC206CF6-BCA1-45D1-87EC-FB10F45223FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC206CF6-BCA1-45D1-87EC-FB10F45223FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC206CF6-BCA1-45D1-87EC-FB10F45223FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EFF2880-88F5-4F69-93B1-E2BAC2C35CB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EFF2880-88F5-4F69-93B1-E2BAC2C35CB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EFF2880-88F5-4F69-93B1-E2BAC2C35CB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EFF2880-88F5-4F69-93B1-E2BAC2C35CB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5630B7C-05CE-4DD2-971F-2A775CBC4547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5630B7C-05CE-4DD2-971F-2A775CBC4547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5630B7C-05CE-4DD2-971F-2A775CBC4547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5630B7C-05CE-4DD2-971F-2A775CBC4547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F134A681-EF9D-4207-861E-A0B0CE09B762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F134A681-EF9D-4207-861E-A0B0CE09B762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F134A681-EF9D-4207-861E-A0B0CE09B762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F134A681-EF9D-4207-861E-A0B0CE09B762}.Release|Any CPU.Build.0 = Release|Any CPU
+		{921ABD62-18D7-4187-9ED9-7D544B78E897}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{921ABD62-18D7-4187-9ED9-7D544B78E897}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{921ABD62-18D7-4187-9ED9-7D544B78E897}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{921ABD62-18D7-4187-9ED9-7D544B78E897}.Release|Any CPU.Build.0 = Release|Any CPU
+		{326FF8D5-BCEA-4D5A-BD2F-3EFBAB0846B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{326FF8D5-BCEA-4D5A-BD2F-3EFBAB0846B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{326FF8D5-BCEA-4D5A-BD2F-3EFBAB0846B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{326FF8D5-BCEA-4D5A-BD2F-3EFBAB0846B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD786210-D27E-4D78-AE48-D281C60E02FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD786210-D27E-4D78-AE48-D281C60E02FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD786210-D27E-4D78-AE48-D281C60E02FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD786210-D27E-4D78-AE48-D281C60E02FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12DD1FD6-C5FC-41F3-AE29-98BB6D9B9546}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12DD1FD6-C5FC-41F3-AE29-98BB6D9B9546}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12DD1FD6-C5FC-41F3-AE29-98BB6D9B9546}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12DD1FD6-C5FC-41F3-AE29-98BB6D9B9546}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BC69E43-6FC7-4673-8079-77620FA13459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BC69E43-6FC7-4673-8079-77620FA13459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BC69E43-6FC7-4673-8079-77620FA13459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BC69E43-6FC7-4673-8079-77620FA13459}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4B3579C-CE39-49AD-8621-47661DB14FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4B3579C-CE39-49AD-8621-47661DB14FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4B3579C-CE39-49AD-8621-47661DB14FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4B3579C-CE39-49AD-8621-47661DB14FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFAF4EC3-1A98-4FD9-9949-FF4287A3AE8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFAF4EC3-1A98-4FD9-9949-FF4287A3AE8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFAF4EC3-1A98-4FD9-9949-FF4287A3AE8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFAF4EC3-1A98-4FD9-9949-FF4287A3AE8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E33F89C1-2145-42EC-81D8-7B8DBAA64B45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E33F89C1-2145-42EC-81D8-7B8DBAA64B45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E33F89C1-2145-42EC-81D8-7B8DBAA64B45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E33F89C1-2145-42EC-81D8-7B8DBAA64B45}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74EFC019-DB7A-4BDB-891D-7210806BC8D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74EFC019-DB7A-4BDB-891D-7210806BC8D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74EFC019-DB7A-4BDB-891D-7210806BC8D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74EFC019-DB7A-4BDB-891D-7210806BC8D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D41A2957-19D7-4117-B611-0FDFAD524126}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D41A2957-19D7-4117-B611-0FDFAD524126}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D41A2957-19D7-4117-B611-0FDFAD524126}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D41A2957-19D7-4117-B611-0FDFAD524126}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0240E95F-DE8D-440F-AF93-0302DE6BE26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0240E95F-DE8D-440F-AF93-0302DE6BE26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0240E95F-DE8D-440F-AF93-0302DE6BE26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0240E95F-DE8D-440F-AF93-0302DE6BE26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B09D6AA-1A97-4FE4-A4DA-2F243C945E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B09D6AA-1A97-4FE4-A4DA-2F243C945E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B09D6AA-1A97-4FE4-A4DA-2F243C945E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B09D6AA-1A97-4FE4-A4DA-2F243C945E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46A8D215-053D-47FF-BF86-2B6181053071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46A8D215-053D-47FF-BF86-2B6181053071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46A8D215-053D-47FF-BF86-2B6181053071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46A8D215-053D-47FF-BF86-2B6181053071}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC206CF6-BCA1-45D1-87EC-FB10F45223FA} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+		{7EFF2880-88F5-4F69-93B1-E2BAC2C35CB4} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+		{F5630B7C-05CE-4DD2-971F-2A775CBC4547} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+		{F134A681-EF9D-4207-861E-A0B0CE09B762} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+		{921ABD62-18D7-4187-9ED9-7D544B78E897} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+		{326FF8D5-BCEA-4D5A-BD2F-3EFBAB0846B2} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+		{DD786210-D27E-4D78-AE48-D281C60E02FF} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+		{12DD1FD6-C5FC-41F3-AE29-98BB6D9B9546} = {DFC40E2B-7692-4AAE-8395-2853EF2670CE}
+		{8BC69E43-6FC7-4673-8079-77620FA13459} = {DFC40E2B-7692-4AAE-8395-2853EF2670CE}
+		{B4B3579C-CE39-49AD-8621-47661DB14FE2} = {DFC40E2B-7692-4AAE-8395-2853EF2670CE}
+		{DFAF4EC3-1A98-4FD9-9949-FF4287A3AE8D} = {A5ABB845-FD16-41D2-B2D4-86FCD099D03C}
+		{E33F89C1-2145-42EC-81D8-7B8DBAA64B45} = {A5ABB845-FD16-41D2-B2D4-86FCD099D03C}
+		{74EFC019-DB7A-4BDB-891D-7210806BC8D6} = {A5ABB845-FD16-41D2-B2D4-86FCD099D03C}
+		{D41A2957-19D7-4117-B611-0FDFAD524126} = {A5ABB845-FD16-41D2-B2D4-86FCD099D03C}
+		{8B09D6AA-1A97-4FE4-A4DA-2F243C945E1D} = {3026B867-11BF-465A-9E68-2CA1F9F18AD1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1847966-AB92-4E7C-AD85-4AE6C9D12576}
+	EndGlobalSection
+EndGlobal
