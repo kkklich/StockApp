@@ -40,6 +40,7 @@ export class ChartComponent implements OnInit {
   private loadData() {
     this.loadCSVService.getRecordsSubscribe().subscribe(res => {
       this.loadedStockData = res;
+      console.log(this.loadedStockData);
       this.applyChart();
     })
   }
@@ -137,8 +138,13 @@ export class ChartComponent implements OnInit {
   }
 
   getAPIRequest() {
-    this.apiHttpService.get<any>(`${environment.apiUrl}version`).subscribe(result => {
+    // this.apiHttpService.get<any>(`${environment.apiUrl}version`).subscribe(result => {
+    this.apiHttpService.get<stockData[]>(`${environment.apiUrl}Stooq/GetStockData`).subscribe(result => {
       console.log(result)
+
+      // console.log(this.loadedStockData);
+      this.loadedStockData = result;
+      this.applyChart();
     })
   }
 

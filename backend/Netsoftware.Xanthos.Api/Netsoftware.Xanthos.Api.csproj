@@ -45,8 +45,5 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>  
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 </Project>

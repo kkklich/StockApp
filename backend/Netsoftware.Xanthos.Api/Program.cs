@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Netsoftware.Xanthos.Api.Services;
 using Netsoftware.Xanthos.Api.StartupExtensions;
 using Netsoftware.Xanthos.ApplicationInstance.Api;
 using Netsoftware.Xanthos.Common.AuthorizationHeaderProviderMiddleware.StartupExtensions;
@@ -56,6 +57,7 @@ services
     .AddTransient<IDbInitializer, DbInitializer>()
     .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
     .AddScoped<ProtoService>()
+    .AddScoped<StooqService>()
     .AddScoped<IUnitOfWork, UnitOfWork>()  
     .AddDistributedMemoryCache()
     .AddHttpContextAccessor()
