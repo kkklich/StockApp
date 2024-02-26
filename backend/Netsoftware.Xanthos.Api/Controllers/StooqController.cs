@@ -27,16 +27,17 @@ namespace Netsoftware.Xanthos.Api.Controllers
 		[HttpGet]
 		public string Get()
 		{
-			const string versionNumber = "9.61";
+			const string versionNumber = "0.01";
 			return versionNumber;
 		}
 
 		[AllowAnonymous]
-		[HttpGet("GetStockData")]
-		public async Task<List<StooqModel>> GetStockDataAsync()
+		[HttpPost("GetStockData")]
+		public async Task<List<StooqModel>> GetStockDataAsync([FromBody] QuotesModel quotes)
 		{
-			string companyPrefix = "pkn";
-			string APIurl = "https://stooq.pl/q/d/l/?s=" + companyPrefix + "&i=d";
+			//string companyPrefix = "pkn";
+			//string APIurl = "https://stooq.pl/q/d/l/?s=" + companyPrefix + "&i=d";
+			string APIurl = "https://stooq.pl/q/d/l/?s=" + quotes.Prefix + "&i=" + quotes.Interval + "";
 			
 			var stooqResponse = await _httpClientApiService.GetRaw(APIurl,false);
 			var result = await stooqResponse.Content.ReadAsStringAsync();

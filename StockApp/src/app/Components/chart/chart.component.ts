@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { stockData } from 'src/app/Models/Interfaces/Stock-model';
+import { stockData } from 'src/app/Models/models/Stock-model';
+import { Interval } from 'src/app/Models/Interfaces/enums/interval-time.enum';
 import { ApiHttpService } from 'src/app/Services/api-http.service';
 import { LoadCSVService } from 'src/app/Services/load-csv.service';
 import { PatternService } from 'src/app/Services/pattern.service';
 import { environment } from 'src/environments/environment.development';
+import { ChartService } from 'src/app/Services/chart.service';
 
 @Component({
   selector: 'app-chart',
@@ -29,8 +31,15 @@ export class ChartComponent implements OnInit {
 
   constructor(private loadCSVService: LoadCSVService,
     private patternService: PatternService,
+    private chartService: ChartService,
     private apiHttpService: ApiHttpService) {
-    this.getAPIRequest();
+    // this.getAPIRequest('pkn');
+    // this.getAPIRequest('PKN');
+
+    this.chartService.getStooqDateSubscribe().subscribe(res => {
+      this.loadedStockData = res;
+      this.applyChart();
+    })
   }
 
   ngOnInit(): void {
@@ -86,6 +95,7 @@ export class ChartComponent implements OnInit {
 
   public applyChart() {
     const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    console.log(dataStock)
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
 
@@ -137,16 +147,7 @@ export class ChartComponent implements OnInit {
     this.chart.update();
   }
 
-  getAPIRequest() {
-    // this.apiHttpService.get<any>(`${environment.apiUrl}version`).subscribe(result => {
-    this.apiHttpService.get<stockData[]>(`${environment.apiUrl}Stooq/GetStockData`).subscribe(result => {
-      console.log(result)
 
-      // console.log(this.loadedStockData);
-      this.loadedStockData = result;
-      this.applyChart();
-    })
-  }
 
 }
 

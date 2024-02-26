@@ -44,6 +44,12 @@
                 </article>
             </div>
         </section>
+        <mat-form-field>
+            <mat-label>Wybierz firmę: </mat-label>
+            <mat-select [(ngModel)]="selectedCompany" (selectionChange)="changeCompany()">
+                <mat-option *ngFor="let company of companyList" [value]="company">{{company.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <app-chart></app-chart>
 
         <!-- Three -->

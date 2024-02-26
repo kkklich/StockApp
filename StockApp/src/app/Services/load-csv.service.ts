@@ -1,5 +1,5 @@
 import { Injectable, ViewChild } from '@angular/core';
-import { stockData } from '../Models/Interfaces/Stock-model';
+import { stockData } from '../Models/models/Stock-model';
 import { Observable, Subject, Subscription } from 'rxjs';
 
 
@@ -59,7 +59,6 @@ export class LoadCSVService {
       }
     })
   }
-
 
   getDataRecordsArrayFromCSVFile(csvRecordsArray: any, headerLength: any): any[] {
     let stockArray: any[] = [];

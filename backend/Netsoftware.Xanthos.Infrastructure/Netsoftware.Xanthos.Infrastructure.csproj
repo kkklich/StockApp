@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\" />
     <Folder Include="Extensions\" />
     <Folder Include="Resources\" />
   </ItemGroup>
