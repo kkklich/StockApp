@@ -27,7 +27,6 @@ export class MainPageComponent {
 
 
     this.loadJSONFile('companies_WSE.json').then(res => {
-      console.log(res);
       this.companyList = res;
     })
   }
@@ -39,7 +38,7 @@ export class MainPageComponent {
   }
 
   public changeCompany() {
-    console.log(this.selectedCompany);
+    console.log(this.selectedCompany)
     this.chartService.getAPICompanyRequest(this.selectedCompany.ticker);
   }
 

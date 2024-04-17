@@ -5,9 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class PatternService {
 
-    constructor() {
-    }
-
+    constructor() { }
 
     public calculateAverageRolling(data: number[], windowSize: number): number[] {
         const result: number[] = [];
