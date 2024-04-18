@@ -61,6 +61,15 @@ export class ChartComponent implements OnInit {
     return sma;
   }
 
+  private calculateWMA(lengthWMA: number): number[] {
+    return this.patternService.weightedMovingAverage(this.stockValueArray, lengthWMA);
+  }
+
+
+  private calculateEMA(lengthWMA: number): number[] {
+    return this.patternService.exponentialMovingAverage(this.stockValueArray, lengthWMA);
+  }
+
   private createLineChart(): void {
     const nameLine = "SMA " + this.lengthChartSMA;
     const fileName = this.loadCSVService.fileTitle;
@@ -95,11 +104,12 @@ export class ChartComponent implements OnInit {
 
   public applyChart() {
     const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-    console.log(dataStock)
+
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
 
-    this.averageRolling = this.calculatePattern(this.lengthChartSMA);
+    // this.averageRolling = this.calculatePattern(this.lengthChartSMA);
+    this.averageRolling = this.calculateEMA(this.lengthChartSMA);
     this.createLineChart();
   }
 
@@ -110,7 +120,8 @@ export class ChartComponent implements OnInit {
     if (line === undefined)
       return;
 
-    const dataChart = this.calculatePattern(lineChart.length);
+    // const dataChart = this.calculatePattern(lineChart.length);
+    const dataChart = this.calculateEMA(lineChart.length);
     line.data = dataChart;
 
     this.chart.update();
@@ -147,6 +158,11 @@ export class ChartComponent implements OnInit {
     this.chart.update();
   }
 
+
+  //add possibility to add lines to chart EMA, ESA, SMA, WMA
+  protected addToChart() {
+
+  }
 
 
 }
