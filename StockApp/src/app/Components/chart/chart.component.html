@@ -8,6 +8,12 @@
                     <mat-option *ngFor="let time of timeStock" [value]="time.numberOfDays">{{time.time}}</mat-option>
                 </mat-select>
             </mat-form-field>
+            <mat-form-field>
+                <mat-label>Wybierz rodzaj notowań: </mat-label>
+                <mat-select [(ngModel)]="quantityOfStockValue" (selectionChange)="addToChart()">
+                    <mat-option *ngFor="let time of timeStock" [value]="time.numberOfDays">{{time.time}}</mat-option>
+                </mat-select>
+            </mat-form-field>
             <br>
 
             <div *ngFor="let lineChart of linesArray; let i = index">
