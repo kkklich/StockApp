@@ -28,6 +28,8 @@ export class ChartComponent implements OnInit {
   public lengthChartSMA: number = 10;
   public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
   private loadedStockData: stockData[] = [];
+  public indicatorArray: string[] = ['SMA', 'EMA', 'ESA', 'WMA'];
+  public selectedIndicator: string = '';
 
   constructor(private loadCSVService: LoadCSVService,
     private patternService: PatternService,
@@ -49,26 +51,10 @@ export class ChartComponent implements OnInit {
   private loadData() {
     this.loadCSVService.getRecordsSubscribe().subscribe(res => {
       this.loadedStockData = res;
-      console.log(this.loadedStockData);
       this.applyChart();
     })
   }
 
-  private calculatePattern(lengthSMA: number): number[] {
-    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
-    sma.unshift(...new Array(lengthSMA).fill(null));
-
-    return sma;
-  }
-
-  private calculateWMA(lengthWMA: number): number[] {
-    return this.patternService.weightedMovingAverage(this.stockValueArray, lengthWMA);
-  }
-
-
-  private calculateEMA(lengthWMA: number): number[] {
-    return this.patternService.exponentialMovingAverage(this.stockValueArray, lengthWMA);
-  }
 
   private createLineChart(): void {
     const nameLine = "SMA " + this.lengthChartSMA;
@@ -107,8 +93,6 @@ export class ChartComponent implements OnInit {
 
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
-
-    // this.averageRolling = this.calculatePattern(this.lengthChartSMA);
     this.averageRolling = this.calculateEMA(this.lengthChartSMA);
     this.createLineChart();
   }
@@ -120,27 +104,53 @@ export class ChartComponent implements OnInit {
     if (line === undefined)
       return;
 
-    // const dataChart = this.calculatePattern(lineChart.length);
     const dataChart = this.calculateEMA(lineChart.length);
     line.data = dataChart;
 
     this.chart.update();
   }
 
-  public addSMA() {
+  private addIndicator(indicator: string) {
     if (this.chart === undefined)
       return;
     const lengthSMA = 20;
-    this.linesArray.push({ length: lengthSMA, name: 'SMA ' + lengthSMA })
-    const dataChart = this.calculatePattern(lengthSMA);
+    const labelName = indicator + ' ' + lengthSMA;
+    this.linesArray.push({ length: lengthSMA, name: labelName })
+    const dataChart = this.chooseIndicator(indicator, lengthSMA);
 
     this.chart.data.datasets.push({
-      label: "SMA " + lengthSMA,
+      label: labelName,
       data: dataChart
     });
 
     this.chart.update();
+  }
 
+  private chooseIndicator(indicator: string, length: number): number[] {
+    switch (indicator) {
+      case 'SMA':
+        return this.calculateSMA(length);
+      case 'WMA':
+        return this.calculateWMA(length);
+      case 'EMA':
+        return this.calculateEMA(length);
+      default:
+        return [];
+    }
+  }
+
+  private calculateSMA(lengthSMA: number): number[] {
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
+    sma.unshift(...new Array(lengthSMA).fill(null));
+    return sma;
+  }
+
+  private calculateWMA(lengthWMA: number): number[] {
+    return this.patternService.weightedMovingAverage(this.stockValueArray, lengthWMA);
+  }
+
+  private calculateEMA(lengthWMA: number): number[] {
+    return this.patternService.exponentialMovingAverage(this.stockValueArray, lengthWMA);
   }
 
   public changeDateChart() {
@@ -158,12 +168,9 @@ export class ChartComponent implements OnInit {
     this.chart.update();
   }
 
+  public addIndicatorToChart(indicator: string) {
+    this.selectedIndicator = this.selectedIndicator.length ? `${this.selectedIndicator}, ${indicator}` : indicator;
 
-  //add possibility to add lines to chart EMA, ESA, SMA, WMA
-  protected addToChart() {
-
+    this.addIndicator(indicator);
   }
-
-
 }
-

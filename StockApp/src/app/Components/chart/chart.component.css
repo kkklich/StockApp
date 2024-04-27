@@ -7,3 +7,17 @@
  mat-icon {
      cursor: pointer;
  }
+
+ mat-form-field {
+     padding: 0 10px;
+     width: 200px !important;
+ }
+
+ .indicators-container {
+     display: flex;
+     flex-wrap: wrap;
+
+     .indicators-select {
+         width: 100%;
+     }
+ }
