@@ -7,6 +7,7 @@ import { LoadCSVService } from 'src/app/Services/load-csv.service';
 import { PatternService } from 'src/app/Services/pattern.service';
 import { environment } from 'src/environments/environment.development';
 import { ChartService } from 'src/app/Services/chart.service';
+import { Indicators } from 'src/app/Models/Interfaces/enums/indicator-type.enum';
 
 @Component({
   selector: 'app-chart',
@@ -28,7 +29,7 @@ export class ChartComponent implements OnInit {
   public lengthChartSMA: number = 10;
   public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
   private loadedStockData: stockData[] = [];
-  public indicatorArray: string[] = ['SMA', 'EMA', 'ESA', 'WMA'];
+  public indicatorArray: string[] = Object.keys(Indicators).map(key => Indicators[key as keyof typeof Indicators]);
   public selectedIndicator: string = '';
 
   constructor(private loadCSVService: LoadCSVService,
@@ -93,7 +94,7 @@ export class ChartComponent implements OnInit {
 
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
-    this.averageRolling = this.calculateEMA(this.lengthChartSMA);
+    this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
   }
 
@@ -104,7 +105,7 @@ export class ChartComponent implements OnInit {
     if (line === undefined)
       return;
 
-    const dataChart = this.calculateEMA(lineChart.length);
+    const dataChart = this.calculateSMA(lineChart.length);
     line.data = dataChart;
 
     this.chart.update();
@@ -128,11 +129,11 @@ export class ChartComponent implements OnInit {
 
   private chooseIndicator(indicator: string, length: number): number[] {
     switch (indicator) {
-      case 'SMA':
+      case Indicators.SMA:
         return this.calculateSMA(length);
-      case 'WMA':
+      case Indicators.WMA:
         return this.calculateWMA(length);
-      case 'EMA':
+      case Indicators.EMA:
         return this.calculateEMA(length);
       default:
         return [];
