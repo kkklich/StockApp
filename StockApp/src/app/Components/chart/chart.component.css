@@ -17,6 +17,16 @@
      display: flex;
      flex-wrap: wrap;
 
+     .list {
+         padding: 10px;
+
+         .close-icon {
+             position: absolute;
+             top: 88px;
+             left: 186px;
+         }
+     }
+
      .indicators-select {
          width: 100%;
      }

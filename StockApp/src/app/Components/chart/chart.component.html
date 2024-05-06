@@ -19,14 +19,18 @@
             <br>
             <div class="indicators-container">
                 <div *ngFor="let lineChart of linesArray; let i = index" class="indicators">
-                    <mat-form-field class="example-form-field indicators-select">
-                        <mat-label>Wybierz długość {{lineChart.name}} {{i}}</mat-label>
-                        <input matInput type="number" min="1" [(ngModel)]="lineChart.length"
-                            (change)="updateChart(lineChart)">
-                    </mat-form-field>
+                    <div class="list">
+                        <mat-form-field class="example-form-field indicators-select">
+                            <mat-label>Wybierz długość {{lineChart.name}} {{i}}</mat-label>
+                            <input matInput type="number" min="1" [(ngModel)]="lineChart.length"
+                                (change)="updateChart(lineChart)">
+                        </mat-form-field>
+                        <mat-icon class="close-icon" (click)="removeIndicatorFromChart(lineChart)">close</mat-icon>
+                    </div>
                     <br>
                 </div>
             </div>
+            <mat-icon>close</mat-icon>
         </div>
     </div>
     <canvas id="chart"></canvas>

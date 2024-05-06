@@ -7,6 +7,7 @@ import { LoadCSVService } from 'src/app/Services/load-csv.service';
 import { PatternService } from 'src/app/Services/pattern.service';
 import { environment } from 'src/environments/environment.development';
 import { ChartService } from 'src/app/Services/chart.service';
+import { chartIndicatorModel } from 'src/app/Models/models/chart-indicator-model';
 
 @Component({
   selector: 'app-chart',
@@ -17,7 +18,7 @@ export class ChartComponent implements OnInit {
 
   public value = "text";
   public timeStock: { time: string, numberOfDays: number }[] = [{ time: '1M', numberOfDays: 20 }, { time: '2M', numberOfDays: 40 }, { time: '3M', numberOfDays: 60 }, { time: '6M', numberOfDays: 120 }, { time: '1R', numberOfDays: 240 }, { time: '3R', numberOfDays: 720 }, { time: 'MAX', numberOfDays: 99999 }];
-  public quantityOfStockValue = this.timeStock[1].numberOfDays;
+  public quantityOfStockValue = this.timeStock[2].numberOfDays;
   public chart: any;
   public recordsStocks: stockData[] = [];
 
@@ -26,7 +27,8 @@ export class ChartComponent implements OnInit {
   private averageRolling: any[] = [];
   public lengthArray: number[] = [10, 20, 30, 50];
   public lengthChartSMA: number = 10;
-  public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
+  // public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
+  public linesArray: chartIndicatorModel[] = [];
   private loadedStockData: stockData[] = [];
   public indicatorArray: string[] = ['SMA', 'EMA', 'ESA', 'WMA'];
   public selectedIndicator: string = '';
@@ -59,6 +61,7 @@ export class ChartComponent implements OnInit {
   private createLineChart(): void {
     const nameLine = "SMA " + this.lengthChartSMA;
     const fileName = this.loadCSVService.fileTitle;
+    console.log('create', this.stockValueArray)
 
     if (this.chart != undefined)
       this.chart.destroy();
@@ -71,10 +74,10 @@ export class ChartComponent implements OnInit {
           label: fileName,
           data: this.stockValueArray
         },
-        {
-          label: nameLine,
-          data: this.averageRolling,
-        }
+          // {
+          //   label: nameLine,
+          //   data: this.averageRolling,
+          // }
         ],
       },
       options: {
@@ -93,18 +96,26 @@ export class ChartComponent implements OnInit {
 
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
-    this.averageRolling = this.calculateEMA(this.lengthChartSMA);
+    // this.averageRolling = this.calculateEMA(this.lengthChartSMA);
+    // this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
   }
 
-  public updateChart(lineChart: any) {
+  public updateChart(lineChart: chartIndicatorModel) {
     if (lineChart.length < 1)
       return;
-    const line = this.chart.data.datasets.find((x: any) => x.label == lineChart.name)
+    console.log(lineChart)
+    console.log(this.chart.data.datasets)
+    // const line = this.chart.data.datasets.find((x: any) => x.label == lineChart.name)
+    const line = this.chart.data.datasets.find((x: any) => x.id == lineChart.id)
     if (line === undefined)
       return;
 
-    const dataChart = this.calculateEMA(lineChart.length);
+    console.log(line)
+
+    // const dataChart = this.calculateEMA(lineChart.length);
+    // const dataChart = this.calculateSMA(lineChart.length);
+    const dataChart = this.chooseIndicator(lineChart);
     line.data = dataChart;
 
     this.chart.update();
@@ -113,35 +124,48 @@ export class ChartComponent implements OnInit {
   private addIndicator(indicator: string) {
     if (this.chart === undefined)
       return;
-    const lengthSMA = 20;
-    const labelName = indicator + ' ' + lengthSMA;
-    this.linesArray.push({ length: lengthSMA, name: labelName })
-    const dataChart = this.chooseIndicator(indicator, lengthSMA);
+    const length = 20;
+    // const labelName = indicator + ' ' + length + ' ' + this.linesArray.length + 1;
+    // const labelName = indicator;
+    const id = Math.random().toString(36).substr(2, 9);
+    this.linesArray.push(
+      {
+        id: id,
+        length: length,
+        name: indicator
+      }
+    )
+    // const dataChart = this.chooseIndicator(indicator, lengthSMA);
+    const dataChart = this.calculateSMA(length);
 
     this.chart.data.datasets.push({
-      label: labelName,
+      id: id,
+      label: indicator + ' ' + length,
       data: dataChart
     });
 
     this.chart.update();
   }
 
-  private chooseIndicator(indicator: string, length: number): number[] {
-    switch (indicator) {
+  private chooseIndicator(indicator: chartIndicatorModel): number[] {
+    console.log(indicator, length)
+    switch (indicator.name) {
       case 'SMA':
-        return this.calculateSMA(length);
+        return this.calculateSMA(indicator.length);
       case 'WMA':
-        return this.calculateWMA(length);
+        return this.calculateWMA(indicator.length);
       case 'EMA':
-        return this.calculateEMA(length);
+        return this.calculateEMA(indicator.length);
       default:
         return [];
     }
   }
 
   private calculateSMA(lengthSMA: number): number[] {
+    console.log(this.stockValueArray, lengthSMA)
     const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
     sma.unshift(...new Array(lengthSMA).fill(null));
+    console.log(sma)
     return sma;
   }
 
@@ -172,5 +196,16 @@ export class ChartComponent implements OnInit {
     this.selectedIndicator = this.selectedIndicator.length ? `${this.selectedIndicator}, ${indicator}` : indicator;
 
     this.addIndicator(indicator);
+  }
+
+  protected removeIndicatorFromChart(lineChart: chartIndicatorModel) {
+    const index = this.linesArray.indexOf(lineChart);
+    if (index > -1) {
+      this.linesArray.splice(index, 1);
+      this.chart.data.datasets.splice(index + 1, 1);
+      this.chart.update();
+    } else {
+      return;
+    }
   }
 }
