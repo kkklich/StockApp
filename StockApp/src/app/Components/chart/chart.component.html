@@ -31,4 +31,7 @@
         </div>
     </div>
     <canvas id="chart"></canvas>
+    <div *ngIf="trend">
+        <mat-label>Na wykresie jest widoczny trend: {{trend}}</mat-label>
+    </div>
 </div>

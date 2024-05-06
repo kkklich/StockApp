@@ -31,6 +31,7 @@ export class ChartComponent implements OnInit {
   private loadedStockData: stockData[] = [];
   public indicatorArray: string[] = Object.keys(Indicators).map(key => Indicators[key as keyof typeof Indicators]);
   public selectedIndicator: string = '';
+  public trend: string = '';
 
   constructor(private loadCSVService: LoadCSVService,
     private patternService: PatternService,
@@ -53,6 +54,7 @@ export class ChartComponent implements OnInit {
     this.loadCSVService.getRecordsSubscribe().subscribe(res => {
       this.loadedStockData = res;
       this.applyChart();
+      this.checkPoints();
     })
   }
 
@@ -90,12 +92,25 @@ export class ChartComponent implements OnInit {
   }
 
   public applyChart() {
-    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-
-    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
-    this.stockValueArray = dataStock.map(x => x.close);
+    this.populateStockDataArrays();
     this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
+    this.calculateIndicators();
+  }
+
+  private checkPoints() {
+    if (this.linesArray[0] === undefined)
+      return;
+
+    this.populateStockDataArrays();
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    const points = this.patternService.detectChangePoints(sma)
+
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    points.forEach(point => {
+      // log change points      
+      // console.log(dataStock[point + this.linesArray[0].length])
+    });
   }
 
   public updateChart(lineChart: any) {
@@ -109,6 +124,7 @@ export class ChartComponent implements OnInit {
     line.data = dataChart;
 
     this.chart.update();
+    this.calculateIndicators();
   }
 
   private addIndicator(indicator: string) {
@@ -121,10 +137,20 @@ export class ChartComponent implements OnInit {
 
     this.chart.data.datasets.push({
       label: labelName,
-      data: dataChart
+      data: dataChart,
+      borderColor: this.randomColor(),
+      backgroundColor: this.randomColor(),
     });
 
     this.chart.update();
+  }
+
+  private randomColor(): string {
+    return 'rgba(' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.random().toPrecision(2).slice(2, 4) + ')';
   }
 
   private chooseIndicator(indicator: string, length: number): number[] {
@@ -155,9 +181,7 @@ export class ChartComponent implements OnInit {
   }
 
   public changeDateChart() {
-    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
-    this.stockValueArray = dataStock.map(x => x.close);
+    this.populateStockDataArrays();
 
     this.chart.data.labels = this.dateTimeArray;
     this.chart.data.datasets[0].data = this.stockValueArray;
@@ -167,11 +191,24 @@ export class ChartComponent implements OnInit {
     }
 
     this.chart.update();
+    this.calculateIndicators();
+  }
+
+  private populateStockDataArrays() {
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
+    this.stockValueArray = dataStock.map(x => x.close);
   }
 
   public addIndicatorToChart(indicator: string) {
     this.selectedIndicator = this.selectedIndicator.length ? `${this.selectedIndicator}, ${indicator}` : indicator;
 
     this.addIndicator(indicator);
+  }
+
+  private calculateIndicators() {
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    this.trend = this.patternService.isUpwardTrend(sma);
+    this.checkPoints();
   }
 }
