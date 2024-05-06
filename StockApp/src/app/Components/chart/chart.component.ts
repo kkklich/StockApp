@@ -8,6 +8,7 @@ import { PatternService } from 'src/app/Services/pattern.service';
 import { environment } from 'src/environments/environment.development';
 import { ChartService } from 'src/app/Services/chart.service';
 import { chartIndicatorModel } from 'src/app/Models/models/chart-indicator-model';
+import { Indicators } from 'src/app/Models/Interfaces/enums/indicator-type.enum';
 
 @Component({
   selector: 'app-chart',
@@ -28,10 +29,11 @@ export class ChartComponent implements OnInit {
   public lengthArray: number[] = [10, 20, 30, 50];
   public lengthChartSMA: number = 10;
 
-  public linesArray: chartIndicatorModel[] = [{ id: Math.random().toString(36).substr(2, 9), length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
+  public linesArray: chartIndicatorModel[] = [];
   private loadedStockData: stockData[] = [];
-  public indicatorArray: string[] = ['SMA', 'EMA', 'ESA', 'WMA'];
+  public indicatorArray: string[] = Object.keys(Indicators).map(key => Indicators[key as keyof typeof Indicators]);
   public selectedIndicator: string = '';
+  public trend: string = '';
 
   constructor(private loadCSVService: LoadCSVService,
     private patternService: PatternService,
@@ -54,12 +56,12 @@ export class ChartComponent implements OnInit {
     this.loadCSVService.getRecordsSubscribe().subscribe(res => {
       this.loadedStockData = res;
       this.applyChart();
+      this.checkPoints();
     })
   }
 
 
   private createLineChart(): void {
-    const nameLine = "SMA " + this.lengthChartSMA;
     const fileName = this.loadCSVService.fileTitle;
 
     if (this.chart != undefined)
@@ -72,12 +74,7 @@ export class ChartComponent implements OnInit {
         datasets: [{
           label: fileName,
           data: this.stockValueArray
-        },
-        {
-          label: nameLine,
-          data: this.averageRolling,
-        }
-        ],
+        }],
       },
       options: {
         responsive: true,
@@ -88,15 +85,30 @@ export class ChartComponent implements OnInit {
         }
       }
     });
+
+    this.addIndicator(Indicators.SMA);
   }
 
   public applyChart() {
-    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-
-    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
-    this.stockValueArray = dataStock.map(x => x.close);
+    this.populateStockDataArrays();
     this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
+    this.calculateIndicators();
+  }
+
+  private checkPoints() {
+    if (this.linesArray[0] === undefined)
+      return;
+
+    this.populateStockDataArrays();
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    const points = this.patternService.detectChangePoints(sma)
+
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    points.forEach(point => {
+      // log change points      
+      // console.log(dataStock[point + this.linesArray[0].length])
+    });
   }
 
   public updateChart(lineChart: chartIndicatorModel) {
@@ -106,10 +118,11 @@ export class ChartComponent implements OnInit {
     if (line === undefined)
       return;
 
-    const dataChart = this.chooseIndicator(lineChart);
+    const dataChart = this.chooseIndicator(lineChart.name, lineChart.length);
     line.data = dataChart;
 
     this.chart.update();
+    this.calculateIndicators();
   }
 
   private addIndicator(indicator: string) {
@@ -124,26 +137,35 @@ export class ChartComponent implements OnInit {
         name: indicator
       }
     )
-    // const dataChart = this.chooseIndicator(indicator, lengthSMA);
-    const dataChart = this.calculateSMA(length);
+    const dataChart = this.chooseIndicator(indicator, length);
 
     this.chart.data.datasets.push({
       id: id,
       label: indicator + ' ' + length,
-      data: dataChart
+      data: dataChart,
+      borderColor: this.randomColor(),
+      backgroundColor: this.randomColor(),
     });
 
     this.chart.update();
   }
 
-  private chooseIndicator(indicator: chartIndicatorModel): number[] {
-    switch (indicator.name) {
-      case 'SMA':
-        return this.calculateSMA(indicator.length);
-      case 'WMA':
-        return this.calculateWMA(indicator.length);
-      case 'EMA':
-        return this.calculateEMA(indicator.length);
+  private randomColor(): string {
+    return 'rgba(' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.random().toPrecision(2).slice(2, 4) + ')';
+  }
+
+  private chooseIndicator(indicator: string, length: number): number[] {
+    switch (indicator) {
+      case Indicators.SMA:
+        return this.calculateSMA(length);
+      case Indicators.WMA:
+        return this.calculateWMA(length);
+      case Indicators.EMA:
+        return this.calculateEMA(length);
       default:
         return [];
     }
@@ -165,9 +187,7 @@ export class ChartComponent implements OnInit {
   }
 
   public changeDateChart() {
-    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
-    this.stockValueArray = dataStock.map(x => x.close);
+    this.populateStockDataArrays();
 
     this.chart.data.labels = this.dateTimeArray;
     this.chart.data.datasets[0].data = this.stockValueArray;
@@ -177,6 +197,13 @@ export class ChartComponent implements OnInit {
     }
 
     this.chart.update();
+    this.calculateIndicators();
+  }
+
+  private populateStockDataArrays() {
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
+    this.stockValueArray = dataStock.map(x => x.close);
   }
 
   public addIndicatorToChart(indicator: string) {
@@ -187,12 +214,17 @@ export class ChartComponent implements OnInit {
 
   protected removeIndicatorFromChart(lineChart: chartIndicatorModel) {
     const index = this.linesArray.indexOf(lineChart);
-    if (index > -1) {
-      this.linesArray.splice(index, 1);
-      this.chart.data.datasets.splice(index + 1, 1);
-      this.chart.update();
-    } else {
+    if (index < 0)
       return;
-    }
+
+    this.linesArray.splice(index, 1);
+    this.chart.data.datasets.splice(index + 1, 1);
+    this.chart.update();
+  }
+
+  private calculateIndicators() {
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    this.trend = this.patternService.isUpwardTrend(sma);
+    this.checkPoints();
   }
 }

@@ -21,7 +21,7 @@
                 <div *ngFor="let lineChart of linesArray; let i = index" class="indicators">
                     <div class="list">
                         <mat-form-field class="example-form-field indicators-select">
-                            <mat-label>Wybierz długość {{lineChart.name}} {{i}}</mat-label>
+                            <mat-label>Długość {{lineChart.name}} {{i}}</mat-label>
                             <input matInput type="number" min="1" [(ngModel)]="lineChart.length"
                                 (change)="updateChart(lineChart)">
                         </mat-form-field>
@@ -34,4 +34,7 @@
         </div>
     </div>
     <canvas id="chart"></canvas>
+    <div *ngIf="trend">
+        <mat-label>Na wykresie jest widoczny trend: {{trend}}</mat-label>
+    </div>
 </div>
