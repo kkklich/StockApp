@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { stockData } from 'src/app/Models/Interfaces/Stock-model';
+import { stockData } from 'src/app/Models/models/Stock-model';
+import { Interval } from 'src/app/Models/Interfaces/enums/interval-time.enum';
 import { ApiHttpService } from 'src/app/Services/api-http.service';
 import { LoadCSVService } from 'src/app/Services/load-csv.service';
 import { PatternService } from 'src/app/Services/pattern.service';
 import { environment } from 'src/environments/environment.development';
+import { ChartService } from 'src/app/Services/chart.service';
+import { Indicators } from 'src/app/Models/Interfaces/enums/indicator-type.enum';
 
 @Component({
   selector: 'app-chart',
@@ -26,11 +29,20 @@ export class ChartComponent implements OnInit {
   public lengthChartSMA: number = 10;
   public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
   private loadedStockData: stockData[] = [];
+  public indicatorArray: string[] = Object.keys(Indicators).map(key => Indicators[key as keyof typeof Indicators]);
+  public selectedIndicator: string = '';
 
   constructor(private loadCSVService: LoadCSVService,
     private patternService: PatternService,
+    private chartService: ChartService,
     private apiHttpService: ApiHttpService) {
-    this.getAPIRequest();
+    // this.getAPIRequest('pkn');
+    // this.getAPIRequest('PKN');
+
+    this.chartService.getStooqDateSubscribe().subscribe(res => {
+      this.loadedStockData = res;
+      this.applyChart();
+    })
   }
 
   ngOnInit(): void {
@@ -44,12 +56,6 @@ export class ChartComponent implements OnInit {
     })
   }
 
-  private calculatePattern(lengthSMA: number): number[] {
-    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
-    sma.unshift(...new Array(lengthSMA).fill(null));
-
-    return sma;
-  }
 
   private createLineChart(): void {
     const nameLine = "SMA " + this.lengthChartSMA;
@@ -85,10 +91,10 @@ export class ChartComponent implements OnInit {
 
   public applyChart() {
     const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
-
-    this.averageRolling = this.calculatePattern(this.lengthChartSMA);
+    this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
   }
 
@@ -99,26 +105,53 @@ export class ChartComponent implements OnInit {
     if (line === undefined)
       return;
 
-    const dataChart = this.calculatePattern(lineChart.length);
+    const dataChart = this.calculateSMA(lineChart.length);
     line.data = dataChart;
 
     this.chart.update();
   }
 
-  public addSMA() {
+  private addIndicator(indicator: string) {
     if (this.chart === undefined)
       return;
     const lengthSMA = 20;
-    this.linesArray.push({ length: lengthSMA, name: 'SMA ' + lengthSMA })
-    const dataChart = this.calculatePattern(lengthSMA);
+    const labelName = indicator + ' ' + lengthSMA;
+    this.linesArray.push({ length: lengthSMA, name: labelName })
+    const dataChart = this.chooseIndicator(indicator, lengthSMA);
 
     this.chart.data.datasets.push({
-      label: "SMA " + lengthSMA,
+      label: labelName,
       data: dataChart
     });
 
     this.chart.update();
+  }
 
+  private chooseIndicator(indicator: string, length: number): number[] {
+    switch (indicator) {
+      case Indicators.SMA:
+        return this.calculateSMA(length);
+      case Indicators.WMA:
+        return this.calculateWMA(length);
+      case Indicators.EMA:
+        return this.calculateEMA(length);
+      default:
+        return [];
+    }
+  }
+
+  private calculateSMA(lengthSMA: number): number[] {
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
+    sma.unshift(...new Array(lengthSMA).fill(null));
+    return sma;
+  }
+
+  private calculateWMA(lengthWMA: number): number[] {
+    return this.patternService.weightedMovingAverage(this.stockValueArray, lengthWMA);
+  }
+
+  private calculateEMA(lengthWMA: number): number[] {
+    return this.patternService.exponentialMovingAverage(this.stockValueArray, lengthWMA);
   }
 
   public changeDateChart() {
@@ -136,11 +169,9 @@ export class ChartComponent implements OnInit {
     this.chart.update();
   }
 
-  getAPIRequest() {
-    this.apiHttpService.get<any>(`${environment.apiUrl}version`).subscribe(result => {
-      console.log(result)
-    })
+  public addIndicatorToChart(indicator: string) {
+    this.selectedIndicator = this.selectedIndicator.length ? `${this.selectedIndicator}, ${indicator}` : indicator;
+
+    this.addIndicator(indicator);
   }
-
 }
-

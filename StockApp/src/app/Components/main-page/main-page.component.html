@@ -12,8 +12,8 @@
     <header id="header">
         <div class="inner">
             <a href="#" class="image avatar"></a>
-            <h1><strong>Jestem Krzysztof</strong><br />
-                A to moja praca magisterska<br />
+            <h1><strong>Krzysztof Klich</strong><br />
+                praca magisterska<br />
             </h1>
         </div>
     </header>
@@ -21,9 +21,9 @@
     <div id="main">
         <section id="one">
             <header class="major">
-                <h3>Witam jest Krzytszof Klich, a to jest moja praca magisterska</h3>
+                <h3>Witam jest Krzytszof Klich</h3>
             </header>
-            <p>W program ten będzie obliczał wskaźniki analizy technicznej na podstwie danych pobranych za pomocą API
+            <p>W program ten będzie obliczał wskaźniki analizy technicznej na podstawie aktualnych danych
             </p>
 
         </section>
@@ -44,6 +44,12 @@
                 </article>
             </div>
         </section>
+        <mat-form-field>
+            <mat-label>Wybierz firmę: </mat-label>
+            <mat-select [(ngModel)]="selectedCompany" (selectionChange)="changeCompany()">
+                <mat-option *ngFor="let company of companyList" [value]="company">{{company.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         <app-chart></app-chart>
 
         <!-- Three -->

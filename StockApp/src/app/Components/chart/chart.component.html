@@ -8,19 +8,25 @@
                     <mat-option *ngFor="let time of timeStock" [value]="time.numberOfDays">{{time.time}}</mat-option>
                 </mat-select>
             </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Wskaźniki: {{selectedIndicator}}</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let indicator of indicatorArray" (click)="addIndicatorToChart(indicator)">
+                        {{ indicator }}</mat-option>
+                </mat-select>
+            </mat-form-field>
             <br>
-
-            <div *ngFor="let lineChart of linesArray; let i = index">
-                <mat-form-field class="example-form-field">
-                    <mat-label>Wybierz długość SMA {{i}}</mat-label>
-                    <input matInput type="number" min="1" [(ngModel)]="lineChart.length"
-                        (change)="updateChart(lineChart)">
-                </mat-form-field>
-                <br>
+            <div class="indicators-container">
+                <div *ngFor="let lineChart of linesArray; let i = index" class="indicators">
+                    <mat-form-field class="example-form-field indicators-select">
+                        <mat-label>Wybierz długość {{lineChart.name}} {{i}}</mat-label>
+                        <input matInput type="number" min="1" [(ngModel)]="lineChart.length"
+                            (change)="updateChart(lineChart)">
+                    </mat-form-field>
+                    <br>
+                </div>
             </div>
-
-            <mat-icon (click)="addSMA()">add</mat-icon>
-
         </div>
     </div>
     <canvas id="chart"></canvas>

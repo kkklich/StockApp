@@ -52,7 +52,7 @@ public class HttpClientApiService : IHttpClientApiService
             }
 
             var result = await resp.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<TOutput>(result);
+			return JsonConvert.DeserializeObject<TOutput>(result);
         }
         catch (Exception e)
         {

@@ -1,0 +1,1310 @@
+[
+    {
+        "name": "06MAGNA",
+        "ticker": "06N"
+    },
+    {
+        "name": "11BIT",
+        "ticker": "11B"
+    },
+    {
+        "name": "3RGAMES",
+        "ticker": "3RG"
+    },
+    {
+        "name": "ABPL",
+        "ticker": "ABE"
+    },
+    {
+        "name": "ACAUTOGAZ",
+        "ticker": "ACG"
+    },
+    {
+        "name": "ACTION",
+        "ticker": "ACT"
+    },
+    {
+        "name": "ADIUVO",
+        "ticker": "ADV"
+    },
+    {
+        "name": "AGORA",
+        "ticker": "AGO"
+    },
+    {
+        "name": "AGROTON",
+        "ticker": "AGT"
+    },
+    {
+        "name": "AIGAMES",
+        "ticker": "ALG"
+    },
+    {
+        "name": "AILLERON",
+        "ticker": "ALL"
+    },
+    {
+        "name": "AIRWAY",
+        "ticker": "AWM"
+    },
+    {
+        "name": "ALIOR",
+        "ticker": "ALR"
+    },
+    {
+        "name": "ALLEGRO",
+        "ticker": "ALE"
+    },
+    {
+        "name": "ALTA",
+        "ticker": "AAT"
+    },
+    {
+        "name": "ALTUS",
+        "ticker": "ALI"
+    },
+    {
+        "name": "AMBRA",
+        "ticker": "AMB"
+    },
+    {
+        "name": "AMICA",
+        "ticker": "AMC"
+    },
+    {
+        "name": "AMREST",
+        "ticker": "EAT"
+    },
+    {
+        "name": "ANSWEAR",
+        "ticker": "ANR"
+    },
+    {
+        "name": "APATOR",
+        "ticker": "APT"
+    },
+    {
+        "name": "APLISENS",
+        "ticker": "APN"
+    },
+    {
+        "name": "APSENERGY",
+        "ticker": "APE"
+    },
+    {
+        "name": "ARCHICOM",
+        "ticker": "ARH"
+    },
+    {
+        "name": "ARCTIC",
+        "ticker": "ATC"
+    },
+    {
+        "name": "ARTIFEX",
+        "ticker": "ART"
+    },
+    {
+        "name": "ASBIS",
+        "ticker": "ASB"
+    },
+    {
+        "name": "ASSECOBS",
+        "ticker": "ABS"
+    },
+    {
+        "name": "ASSECOPOL",
+        "ticker": "ACP"
+    },
+    {
+        "name": "ASSECOSEE",
+        "ticker": "ASE"
+    },
+    {
+        "name": "ASTARTA",
+        "ticker": "AST"
+    },
+    {
+        "name": "ATAL",
+        "ticker": "1AT"
+    },
+    {
+        "name": "ATENDE",
+        "ticker": "ATD"
+    },
+    {
+        "name": "ATLANTAPL",
+        "ticker": "ATP"
+    },
+    {
+        "name": "ATLANTIS",
+        "ticker": "ATS"
+    },
+    {
+        "name": "ATMGRUPA",
+        "ticker": "ATG"
+    },
+    {
+        "name": "ATREM",
+        "ticker": "ATR"
+    },
+    {
+        "name": "AUTOPARTN",
+        "ticker": "APR"
+    },
+    {
+        "name": "BBIDEV",
+        "ticker": "BBD"
+    },
+    {
+        "name": "BEDZIN",
+        "ticker": "BDZ"
+    },
+    {
+        "name": "BENEFIT",
+        "ticker": "BFT"
+    },
+    {
+        "name": "BETACOM",
+        "ticker": "BCM"
+    },
+    {
+        "name": "BIGCHEESE",
+        "ticker": "BCS"
+    },
+    {
+        "name": "BIOCELTIX",
+        "ticker": "BCX"
+    },
+    {
+        "name": "BIOMAXIMA",
+        "ticker": "BMX"
+    },
+    {
+        "name": "BIOPLANET",
+        "ticker": "BIP"
+    },
+    {
+        "name": "BIOTON",
+        "ticker": "BIO"
+    },
+    {
+        "name": "BLOOBER",
+        "ticker": "BLO"
+    },
+    {
+        "name": "BNPPPL",
+        "ticker": "BNP"
+    },
+    {
+        "name": "BOGDANKA",
+        "ticker": "LWB"
+    },
+    {
+        "name": "BOOMBIT",
+        "ticker": "BBT"
+    },
+    {
+        "name": "BORYSZEW",
+        "ticker": "BRS"
+    },
+    {
+        "name": "BOS",
+        "ticker": "BOS"
+    },
+    {
+        "name": "BOWIM",
+        "ticker": "BOW"
+    },
+    {
+        "name": "BRAND24",
+        "ticker": "B24"
+    },
+    {
+        "name": "BUDIMEX",
+        "ticker": "BDX"
+    },
+    {
+        "name": "BUMECH",
+        "ticker": "BMC"
+    },
+    {
+        "name": "CAPTORTX",
+        "ticker": "CTX"
+    },
+    {
+        "name": "CASPAR",
+        "ticker": "CSR"
+    },
+    {
+        "name": "CAVATINA",
+        "ticker": "CAV"
+    },
+    {
+        "name": "CCC",
+        "ticker": "CCC"
+    },
+    {
+        "name": "CDPROJEKT",
+        "ticker": "CDR"
+    },
+    {
+        "name": "CDRL",
+        "ticker": "CDL"
+    },
+    {
+        "name": "CELTIC",
+        "ticker": "CPD"
+    },
+    {
+        "name": "CEZ",
+        "ticker": "CEZ"
+    },
+    {
+        "name": "CIGAMES",
+        "ticker": "CIG"
+    },
+    {
+        "name": "CITYSERV",
+        "ticker": "CTS"
+    },
+    {
+        "name": "CLNPHARMA",
+        "ticker": "CLN"
+    },
+    {
+        "name": "CLOUD",
+        "ticker": "CLD"
+    },
+    {
+        "name": "COALENERG",
+        "ticker": "CLE"
+    },
+    {
+        "name": "COGNOR",
+        "ticker": "COG"
+    },
+    {
+        "name": "COLUMBUS",
+        "ticker": "CLC"
+    },
+    {
+        "name": "COMARCH",
+        "ticker": "CMR"
+    },
+    {
+        "name": "COMP",
+        "ticker": "CMP"
+    },
+    {
+        "name": "COMPERIA",
+        "ticker": "CPL"
+    },
+    {
+        "name": "COMPREMUM",
+        "ticker": "CPR"
+    },
+    {
+        "name": "CORMAY",
+        "ticker": "CRM"
+    },
+    {
+        "name": "CREEPYJAR",
+        "ticker": "CRJ"
+    },
+    {
+        "name": "CREOTECH",
+        "ticker": "CRI"
+    },
+    {
+        "name": "CYBERFLKS",
+        "ticker": "CBF"
+    },
+    {
+        "name": "CYFRPLSAT",
+        "ticker": "CPS"
+    },
+    {
+        "name": "DADELO",
+        "ticker": "DAD"
+    },
+    {
+        "name": "DATAWALK",
+        "ticker": "DAT"
+    },
+    {
+        "name": "DBENERGY",
+        "ticker": "DBE"
+    },
+    {
+        "name": "DECORA",
+        "ticker": "DCR"
+    },
+    {
+        "name": "DEKPOL",
+        "ticker": "DEK"
+    },
+    {
+        "name": "DELKO",
+        "ticker": "DEL"
+    },
+    {
+        "name": "DEVELIA",
+        "ticker": "DVL"
+    },
+    {
+        "name": "DIGITANET",
+        "ticker": "DIG"
+    },
+    {
+        "name": "DINOPL",
+        "ticker": "DNP"
+    },
+    {
+        "name": "DOMDEV",
+        "ticker": "DOM"
+    },
+    {
+        "name": "DRAGOENT",
+        "ticker": "DGE"
+    },
+    {
+        "name": "DROZAPOL",
+        "ticker": "DPL"
+    },
+    {
+        "name": "ECHO",
+        "ticker": "ECH"
+    },
+    {
+        "name": "ELEKTROTI",
+        "ticker": "ELT"
+    },
+    {
+        "name": "ELKOP",
+        "ticker": "EKP"
+    },
+    {
+        "name": "ENEA",
+        "ticker": "ENA"
+    },
+    {
+        "name": "ENELMED",
+        "ticker": "ENE"
+    },
+    {
+        "name": "ENTER",
+        "ticker": "ENT"
+    },
+    {
+        "name": "ERBUD",
+        "ticker": "ERB"
+    },
+    {
+        "name": "ERG",
+        "ticker": "ERG"
+    },
+    {
+        "name": "ESOTIQ",
+        "ticker": "EAH"
+    },
+    {
+        "name": "EUROCASH",
+        "ticker": "EUR"
+    },
+    {
+        "name": "EUROHOLD",
+        "ticker": "EHG"
+    },
+    {
+        "name": "EUROTEL",
+        "ticker": "ETL"
+    },
+    {
+        "name": "FABRITY",
+        "ticker": "FAB"
+    },
+    {
+        "name": "FASING",
+        "ticker": "FSG"
+    },
+    {
+        "name": "FEERUM",
+        "ticker": "FEE"
+    },
+    {
+        "name": "FERRO",
+        "ticker": "FRO"
+    },
+    {
+        "name": "FERRUM",
+        "ticker": "FER"
+    },
+    {
+        "name": "FMG",
+        "ticker": "FMG"
+    },
+    {
+        "name": "FON",
+        "ticker": "FON"
+    },
+    {
+        "name": "FORTE",
+        "ticker": "FTE"
+    },
+    {
+        "name": "GAMEOPS",
+        "ticker": "GOP"
+    },
+    {
+        "name": "GAMFACTOR",
+        "ticker": "GIF"
+    },
+    {
+        "name": "GENOMTEC",
+        "ticker": "GMT"
+    },
+    {
+        "name": "GETIN",
+        "ticker": "GTN"
+    },
+    {
+        "name": "GPW",
+        "ticker": "GPW"
+    },
+    {
+        "name": "GREENX",
+        "ticker": "GRX"
+    },
+    {
+        "name": "GRENEVIA",
+        "ticker": "GEA"
+    },
+    {
+        "name": "GRODNO",
+        "ticker": "GRN"
+    },
+    {
+        "name": "GRUPAAZOTY",
+        "ticker": "ATT"
+    },
+    {
+        "name": "GRUPRACUJ",
+        "ticker": "GPP"
+    },
+    {
+        "name": "GTC",
+        "ticker": "GTC"
+    },
+    {
+        "name": "HANDLOWY",
+        "ticker": "BHW"
+    },
+    {
+        "name": "HARPER",
+        "ticker": "HRP"
+    },
+    {
+        "name": "HELIO",
+        "ticker": "HEL"
+    },
+    {
+        "name": "HUUUGE",
+        "ticker": "HUG"
+    },
+    {
+        "name": "HYDROTOR",
+        "ticker": "HDR"
+    },
+    {
+        "name": "IFIRMA",
+        "ticker": "IFI"
+    },
+    {
+        "name": "IIAAV",
+        "ticker": "IIA"
+    },
+    {
+        "name": "IMCOMPANY",
+        "ticker": "IMC"
+    },
+    {
+        "name": "IMMOBILE",
+        "ticker": "GKI"
+    },
+    {
+        "name": "IMS",
+        "ticker": "IMS"
+    },
+    {
+        "name": "INC",
+        "ticker": "INC"
+    },
+    {
+        "name": "INGBSK",
+        "ticker": "ING"
+    },
+    {
+        "name": "INPRO",
+        "ticker": "INP"
+    },
+    {
+        "name": "INSTALKRK",
+        "ticker": "INK"
+    },
+    {
+        "name": "INTERCARS",
+        "ticker": "CAR"
+    },
+    {
+        "name": "INTERSPPL",
+        "ticker": "IPO"
+    },
+    {
+        "name": "INTROL",
+        "ticker": "INL"
+    },
+    {
+        "name": "IPOPEMA",
+        "ticker": "IPE"
+    },
+    {
+        "name": "IZOLACJA",
+        "ticker": "IZO"
+    },
+    {
+        "name": "IZOSTAL",
+        "ticker": "IZS"
+    },
+    {
+        "name": "JSW",
+        "ticker": "JSW"
+    },
+    {
+        "name": "KCI",
+        "ticker": "KCI"
+    },
+    {
+        "name": "KETY",
+        "ticker": "KTY"
+    },
+    {
+        "name": "KGHM",
+        "ticker": "KGH"
+    },
+    {
+        "name": "KINOPOL",
+        "ticker": "KPL"
+    },
+    {
+        "name": "KOGENERA",
+        "ticker": "KGN"
+    },
+    {
+        "name": "KOMPAP",
+        "ticker": "KMP"
+    },
+    {
+        "name": "KOMPUTRON",
+        "ticker": "KOM"
+    },
+    {
+        "name": "KPPD",
+        "ticker": "KPD"
+    },
+    {
+        "name": "KRKA",
+        "ticker": "KRK"
+    },
+    {
+        "name": "KRUK",
+        "ticker": "KRU"
+    },
+    {
+        "name": "KRVITAMIN",
+        "ticker": "KVT"
+    },
+    {
+        "name": "KSGAGRO",
+        "ticker": "KSG"
+    },
+    {
+        "name": "LARQ",
+        "ticker": "LRQ"
+    },
+    {
+        "name": "LENA",
+        "ticker": "LEN"
+    },
+    {
+        "name": "LENTEX",
+        "ticker": "LTX"
+    },
+    {
+        "name": "LESS",
+        "ticker": "LES"
+    },
+    {
+        "name": "LIBET",
+        "ticker": "LBT"
+    },
+    {
+        "name": "LOKUM",
+        "ticker": "LKD"
+    },
+    {
+        "name": "LPP",
+        "ticker": "LPP"
+    },
+    {
+        "name": "LSISOFT",
+        "ticker": "LSI"
+    },
+    {
+        "name": "LUBAWA",
+        "ticker": "LBW"
+    },
+    {
+        "name": "MABION",
+        "ticker": "MAB"
+    },
+    {
+        "name": "MAKARONPL",
+        "ticker": "MAK"
+    },
+    {
+        "name": "MANGATA",
+        "ticker": "MGT"
+    },
+    {
+        "name": "MARVIPOL",
+        "ticker": "MVP"
+    },
+    {
+        "name": "MAXCOM",
+        "ticker": "MXC"
+    },
+    {
+        "name": "MBANK",
+        "ticker": "MBK"
+    },
+    {
+        "name": "MBWS",
+        "ticker": "MBW"
+    },
+    {
+        "name": "MCI",
+        "ticker": "MCI"
+    },
+    {
+        "name": "MDIENERGIA",
+        "ticker": "MDI"
+    },
+    {
+        "name": "MEDICALG",
+        "ticker": "MDG"
+    },
+    {
+        "name": "MEDINICE",
+        "ticker": "ICE"
+    },
+    {
+        "name": "MENNICA",
+        "ticker": "MNC"
+    },
+    {
+        "name": "MERCATOR",
+        "ticker": "MRC"
+    },
+    {
+        "name": "MERCOR",
+        "ticker": "MCR"
+    },
+    {
+        "name": "MEXPOLSKA",
+        "ticker": "MEX"
+    },
+    {
+        "name": "MFO",
+        "ticker": "MFO"
+    },
+    {
+        "name": "MILKILAND",
+        "ticker": "MLK"
+    },
+    {
+        "name": "MILLENNIUM",
+        "ticker": "MIL"
+    },
+    {
+        "name": "MIRACULUM",
+        "ticker": "MIR"
+    },
+    {
+        "name": "MIRBUD",
+        "ticker": "MRB"
+    },
+    {
+        "name": "MLPGROUP",
+        "ticker": "MLG"
+    },
+    {
+        "name": "MLSYSTEM",
+        "ticker": "MLS"
+    },
+    {
+        "name": "MOBRUK",
+        "ticker": "MBR"
+    },
+    {
+        "name": "MOJ",
+        "ticker": "MOJ"
+    },
+    {
+        "name": "MOL",
+        "ticker": "MOL"
+    },
+    {
+        "name": "MOLECURE",
+        "ticker": "MOC"
+    },
+    {
+        "name": "MONNARI",
+        "ticker": "MON"
+    },
+    {
+        "name": "MOSTALPLC",
+        "ticker": "MSP"
+    },
+    {
+        "name": "MOSTALWAR",
+        "ticker": "MSW"
+    },
+    {
+        "name": "MOSTALZAB",
+        "ticker": "MSZ"
+    },
+    {
+        "name": "MOVIEGAMES",
+        "ticker": "MOV"
+    },
+    {
+        "name": "MURAPOL",
+        "ticker": "MUR"
+    },
+    {
+        "name": "MUZA",
+        "ticker": "MZA"
+    },
+    {
+        "name": "NANOGROUP",
+        "ticker": "NNG"
+    },
+    {
+        "name": "NEUCA",
+        "ticker": "NEU"
+    },
+    {
+        "name": "NEWAG",
+        "ticker": "NWG"
+    },
+    {
+        "name": "NEXITY",
+        "ticker": "NXG"
+    },
+    {
+        "name": "NOVAVISGR",
+        "ticker": "NVG"
+    },
+    {
+        "name": "NTCAPITAL",
+        "ticker": "NTC"
+    },
+    {
+        "name": "NTTSYSTEM",
+        "ticker": "NTT"
+    },
+    {
+        "name": "ODLEWNIE",
+        "ticker": "ODL"
+    },
+    {
+        "name": "OEX",
+        "ticker": "OEX"
+    },
+    {
+        "name": "ONDE",
+        "ticker": "OND"
+    },
+    {
+        "name": "ONESANO",
+        "ticker": "ONO"
+    },
+    {
+        "name": "OPONEO.PL",
+        "ticker": "OPN"
+    },
+    {
+        "name": "OPTEAM",
+        "ticker": "OPM"
+    },
+    {
+        "name": "ORANGEPL",
+        "ticker": "OPL"
+    },
+    {
+        "name": "OTLOG",
+        "ticker": "OTS"
+    },
+    {
+        "name": "OTMUCHOW",
+        "ticker": "OTM"
+    },
+    {
+        "name": "PAMAPOL",
+        "ticker": "PMP"
+    },
+    {
+        "name": "PANOVA",
+        "ticker": "NVA"
+    },
+    {
+        "name": "PASSUS",
+        "ticker": "PAS"
+    },
+    {
+        "name": "PATENTUS",
+        "ticker": "PAT"
+    },
+    {
+        "name": "PCCROKITA",
+        "ticker": "PCR"
+    },
+    {
+        "name": "PCFGROUP",
+        "ticker": "PCF"
+    },
+    {
+        "name": "PEKABEX",
+        "ticker": "PBX"
+    },
+    {
+        "name": "PEKAO",
+        "ticker": "PEO"
+    },
+    {
+        "name": "PEP",
+        "ticker": "PEP"
+    },
+    {
+        "name": "PEPCO",
+        "ticker": "PCO"
+    },
+    {
+        "name": "PEPEES",
+        "ticker": "PPS"
+    },
+    {
+        "name": "PGE",
+        "ticker": "PGE"
+    },
+    {
+        "name": "PGFGROUP",
+        "ticker": "PGV"
+    },
+    {
+        "name": "PHARMENA",
+        "ticker": "PHR"
+    },
+    {
+        "name": "PHN",
+        "ticker": "PHN"
+    },
+    {
+        "name": "PHOTON",
+        "ticker": "PEN"
+    },
+    {
+        "name": "PJPMAKRUM",
+        "ticker": "PJP"
+    },
+    {
+        "name": "PKNORLEN",
+        "ticker": "PKN"
+    },
+    {
+        "name": "PKOBP",
+        "ticker": "PKO"
+    },
+    {
+        "name": "PKPCARGO",
+        "ticker": "PKP"
+    },
+    {
+        "name": "PLAYWAY",
+        "ticker": "PLW"
+    },
+    {
+        "name": "PLAZACNTR",
+        "ticker": "PLZ"
+    },
+    {
+        "name": "PMPG",
+        "ticker": "PGM"
+    },
+    {
+        "name": "POLICE",
+        "ticker": "PCE"
+    },
+    {
+        "name": "POLIMEXMS",
+        "ticker": "PXM"
+    },
+    {
+        "name": "POLTREG",
+        "ticker": "PTG"
+    },
+    {
+        "name": "POLWAX",
+        "ticker": "PWX"
+    },
+    {
+        "name": "PRAGMAINK",
+        "ticker": "PRI"
+    },
+    {
+        "name": "PROCHEM",
+        "ticker": "PRM"
+    },
+    {
+        "name": "PROTEKTOR",
+        "ticker": "PRT"
+    },
+    {
+        "name": "PURE",
+        "ticker": "PUR"
+    },
+    {
+        "name": "PZU",
+        "ticker": "PZU"
+    },
+    {
+        "name": "QUERCUS",
+        "ticker": "QRS"
+    },
+    {
+        "name": "RAEN",
+        "ticker": "RAE"
+    },
+    {
+        "name": "RAFAKO",
+        "ticker": "RFK"
+    },
+    {
+        "name": "RAINBOW",
+        "ticker": "RBW"
+    },
+    {
+        "name": "RANKPROGR",
+        "ticker": "RNK"
+    },
+    {
+        "name": "RAWLPLUG",
+        "ticker": "RWL"
+    },
+    {
+        "name": "REDAN",
+        "ticker": "RDN"
+    },
+    {
+        "name": "RELPOL",
+        "ticker": "RLP"
+    },
+    {
+        "name": "REMAK",
+        "ticker": "RMK"
+    },
+    {
+        "name": "RESBUD",
+        "ticker": "RES"
+    },
+    {
+        "name": "ROPCZYCE",
+        "ticker": "RPC"
+    },
+    {
+        "name": "RYVU",
+        "ticker": "RVU"
+    },
+    {
+        "name": "SANOK",
+        "ticker": "SNK"
+    },
+    {
+        "name": "SANPL",
+        "ticker": "SPL"
+    },
+    {
+        "name": "SANTANDER",
+        "ticker": "SAN"
+    },
+    {
+        "name": "SANWIL",
+        "ticker": "SNW"
+    },
+    {
+        "name": "SATIS",
+        "ticker": "STS"
+    },
+    {
+        "name": "SCPFL",
+        "ticker": "SCP"
+    },
+    {
+        "name": "SECOGROUP",
+        "ticker": "SWG"
+    },
+    {
+        "name": "SEKO",
+        "ticker": "SEK"
+    },
+    {
+        "name": "SELENAFM",
+        "ticker": "SEL"
+    },
+    {
+        "name": "SELVITA",
+        "ticker": "SLV"
+    },
+    {
+        "name": "SESCOM",
+        "ticker": "SES"
+    },
+    {
+        "name": "SFINKS",
+        "ticker": "SFS"
+    },
+    {
+        "name": "SHOPER",
+        "ticker": "SHO"
+    },
+    {
+        "name": "SILVAIR-REGS",
+        "ticker": "SVRS"
+    },
+    {
+        "name": "SILVANO",
+        "ticker": "SFG"
+    },
+    {
+        "name": "SIMFABRIC",
+        "ticker": "SIM"
+    },
+    {
+        "name": "SKARBIEC",
+        "ticker": "SKH"
+    },
+    {
+        "name": "SKYLINE",
+        "ticker": "SKL"
+    },
+    {
+        "name": "SNIEZKA",
+        "ticker": "SKA"
+    },
+    {
+        "name": "SNTVERSE",
+        "ticker": "SVE"
+    },
+    {
+        "name": "SONEL",
+        "ticker": "SON"
+    },
+    {
+        "name": "SOPHARMA",
+        "ticker": "SPH"
+    },
+    {
+        "name": "SPYROSOFT",
+        "ticker": "SPR"
+    },
+    {
+        "name": "STALEXP",
+        "ticker": "STX"
+    },
+    {
+        "name": "STALPROD",
+        "ticker": "STP"
+    },
+    {
+        "name": "STALPROFI",
+        "ticker": "STF"
+    },
+    {
+        "name": "STAPORKOW",
+        "ticker": "ZUK"
+    },
+    {
+        "name": "SUNEX",
+        "ticker": "SNX"
+    },
+    {
+        "name": "SYGNITY",
+        "ticker": "SGN"
+    },
+    {
+        "name": "SYNEKTIK",
+        "ticker": "SNT"
+    },
+    {
+        "name": "TALEX",
+        "ticker": "TLX"
+    },
+    {
+        "name": "TARCZYNSKI",
+        "ticker": "TAR"
+    },
+    {
+        "name": "TATRY",
+        "ticker": "TMR"
+    },
+    {
+        "name": "TAURONPE",
+        "ticker": "TPE"
+    },
+    {
+        "name": "TESGAS",
+        "ticker": "TSG"
+    },
+    {
+        "name": "TEXT",
+        "ticker": "TXT"
+    },
+    {
+        "name": "TORPOL",
+        "ticker": "TOR"
+    },
+    {
+        "name": "TOYA",
+        "ticker": "TOA"
+    },
+    {
+        "name": "TRANSPOL",
+        "ticker": "TRN"
+    },
+    {
+        "name": "TSGAMES",
+        "ticker": "TEN"
+    },
+    {
+        "name": "ULMA",
+        "ticker": "ULM"
+    },
+    {
+        "name": "ULTGAMES",
+        "ticker": "ULG"
+    },
+    {
+        "name": "UNIBEP",
+        "ticker": "UNI"
+    },
+    {
+        "name": "UNICREDIT",
+        "ticker": "UCG"
+    },
+    {
+        "name": "UNIMOT",
+        "ticker": "UNT"
+    },
+    {
+        "name": "URTESTE",
+        "ticker": "URT"
+    },
+    {
+        "name": "VERCOM",
+        "ticker": "VRC"
+    },
+    {
+        "name": "VIGOPHOTN",
+        "ticker": "VGO"
+    },
+    {
+        "name": "VINDEXUS",
+        "ticker": "VIN"
+    },
+    {
+        "name": "VIVID",
+        "ticker": "VVD"
+    },
+    {
+        "name": "VOTUM",
+        "ticker": "VOT"
+    },
+    {
+        "name": "VOXEL",
+        "ticker": "VOX"
+    },
+    {
+        "name": "VRG",
+        "ticker": "VRG"
+    },
+    {
+        "name": "WASKO",
+        "ticker": "WAS"
+    },
+    {
+        "name": "WAWEL",
+        "ticker": "WWL"
+    },
+    {
+        "name": "WIELTON",
+        "ticker": "WLT"
+    },
+    {
+        "name": "WIKANA",
+        "ticker": "WIK"
+    },
+    {
+        "name": "WIRTUALNA",
+        "ticker": "WPL"
+    },
+    {
+        "name": "WITTCHEN",
+        "ticker": "WTN"
+    },
+    {
+        "name": "WOJAS",
+        "ticker": "WOJ"
+    },
+    {
+        "name": "XPLUS",
+        "ticker": "XPL"
+    },
+    {
+        "name": "XTB",
+        "ticker": "XTB"
+    },
+    {
+        "name": "XTPL",
+        "ticker": "XTP"
+    },
+    {
+        "name": "YARRL",
+        "ticker": "YRL"
+    },
+    {
+        "name": "ZAMET",
+        "ticker": "ZMT"
+    },
+    {
+        "name": "ZEPAK",
+        "ticker": "ZEP"
+    },
+    {
+        "name": "ZREMB",
+        "ticker": "ZRE"
+    },
+    {
+        "name": "ZUE",
+        "ticker": "ZUE"
+    }
+]

@@ -4,5 +4,5 @@ export interface stockData {
     high: number;
     low: number;
     close: number;
-    volumen: number
+    volumen: number;
 }
