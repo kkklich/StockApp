@@ -7,6 +7,7 @@ import { LoadCSVService } from 'src/app/Services/load-csv.service';
 import { PatternService } from 'src/app/Services/pattern.service';
 import { environment } from 'src/environments/environment.development';
 import { ChartService } from 'src/app/Services/chart.service';
+import { chartIndicatorModel } from 'src/app/Models/models/chart-indicator-model';
 import { Indicators } from 'src/app/Models/Interfaces/enums/indicator-type.enum';
 
 @Component({
@@ -18,7 +19,7 @@ export class ChartComponent implements OnInit {
 
   public value = "text";
   public timeStock: { time: string, numberOfDays: number }[] = [{ time: '1M', numberOfDays: 20 }, { time: '2M', numberOfDays: 40 }, { time: '3M', numberOfDays: 60 }, { time: '6M', numberOfDays: 120 }, { time: '1R', numberOfDays: 240 }, { time: '3R', numberOfDays: 720 }, { time: 'MAX', numberOfDays: 99999 }];
-  public quantityOfStockValue = this.timeStock[1].numberOfDays;
+  public quantityOfStockValue = this.timeStock[2].numberOfDays;
   public chart: any;
   public recordsStocks: stockData[] = [];
 
@@ -27,7 +28,8 @@ export class ChartComponent implements OnInit {
   private averageRolling: any[] = [];
   public lengthArray: number[] = [10, 20, 30, 50];
   public lengthChartSMA: number = 10;
-  public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
+
+  public linesArray: chartIndicatorModel[] = [];
   private loadedStockData: stockData[] = [];
   public indicatorArray: string[] = Object.keys(Indicators).map(key => Indicators[key as keyof typeof Indicators]);
   public selectedIndicator: string = '';
@@ -60,7 +62,6 @@ export class ChartComponent implements OnInit {
 
 
   private createLineChart(): void {
-    const nameLine = "SMA " + this.lengthChartSMA;
     const fileName = this.loadCSVService.fileTitle;
 
     if (this.chart != undefined)
@@ -73,12 +74,7 @@ export class ChartComponent implements OnInit {
         datasets: [{
           label: fileName,
           data: this.stockValueArray
-        },
-        {
-          label: nameLine,
-          data: this.averageRolling,
-        }
-        ],
+        }],
       },
       options: {
         responsive: true,
@@ -89,6 +85,8 @@ export class ChartComponent implements OnInit {
         }
       }
     });
+
+    this.addIndicator(Indicators.SMA);
   }
 
   public applyChart() {
@@ -113,14 +111,14 @@ export class ChartComponent implements OnInit {
     });
   }
 
-  public updateChart(lineChart: any) {
+  public updateChart(lineChart: chartIndicatorModel) {
     if (lineChart.length < 1)
       return;
-    const line = this.chart.data.datasets.find((x: any) => x.label == lineChart.name)
+    const line = this.chart.data.datasets.find((x: any) => x.id == lineChart.id)
     if (line === undefined)
       return;
 
-    const dataChart = this.calculateSMA(lineChart.length);
+    const dataChart = this.chooseIndicator(lineChart.name, lineChart.length);
     line.data = dataChart;
 
     this.chart.update();
@@ -130,13 +128,20 @@ export class ChartComponent implements OnInit {
   private addIndicator(indicator: string) {
     if (this.chart === undefined)
       return;
-    const lengthSMA = 20;
-    const labelName = indicator + ' ' + lengthSMA;
-    this.linesArray.push({ length: lengthSMA, name: labelName })
-    const dataChart = this.chooseIndicator(indicator, lengthSMA);
+    const length = 20;
+    const id = Math.random().toString(36).substr(2, 9);
+    this.linesArray.push(
+      {
+        id: id,
+        length: length,
+        name: indicator
+      }
+    )
+    const dataChart = this.chooseIndicator(indicator, length);
 
     this.chart.data.datasets.push({
-      label: labelName,
+      id: id,
+      label: indicator + ' ' + length,
       data: dataChart,
       borderColor: this.randomColor(),
       backgroundColor: this.randomColor(),
@@ -169,6 +174,7 @@ export class ChartComponent implements OnInit {
   private calculateSMA(lengthSMA: number): number[] {
     const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
     sma.unshift(...new Array(lengthSMA).fill(null));
+    console.log(sma)
     return sma;
   }
 
@@ -204,6 +210,16 @@ export class ChartComponent implements OnInit {
     this.selectedIndicator = this.selectedIndicator.length ? `${this.selectedIndicator}, ${indicator}` : indicator;
 
     this.addIndicator(indicator);
+  }
+
+  protected removeIndicatorFromChart(lineChart: chartIndicatorModel) {
+    const index = this.linesArray.indexOf(lineChart);
+    if (index < 0)
+      return;
+
+    this.linesArray.splice(index, 1);
+    this.chart.data.datasets.splice(index + 1, 1);
+    this.chart.update();
   }
 
   private calculateIndicators() {
