@@ -9,25 +9,29 @@
  }
 
  mat-form-field {
-     padding: 0 10px;
-     width: 200px !important;
+     padding-right: 20px;
+     width: 220px !important;
  }
 
  .indicators-container {
      display: flex;
      flex-wrap: wrap;
 
-     .list {
-         padding: 10px;
-
-         .close-icon {
-             position: absolute;
-             top: 88px;
-             left: 186px;
+     .indicators {
+         mat-form-field.example-form-field {
+             display: flex;
+             align-items: flex-end;
          }
-     }
 
-     .indicators-select {
-         width: 100%;
+         mat-form-field.example-form-field mat-icon {
+             position: absolute;
+             top: 0;
+             right: -15px;
+         }
+
+         .indicators-select {
+             width: 100%;
+             position: relative
+         }
      }
  }

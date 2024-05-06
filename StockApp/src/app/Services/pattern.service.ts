@@ -85,8 +85,10 @@ export class PatternService {
             return `Boczny (${trendStrength}%)`;
 
         const trendDirection = diff > 0 ? 'wzrostowy' : 'spadkowy';
-        return `${trendDirection} (${trendStrength}%)`;
-    }
+        return trendDirection;
+    };
+    // return `${trendDirection} (${trendStrength}%)`;
+
 
     //wskażnik impetu RSI
     //oscylator stochastyczny

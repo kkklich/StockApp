@@ -34,6 +34,7 @@ export class ChartComponent implements OnInit {
   public indicatorArray: string[] = Object.keys(Indicators).map(key => Indicators[key as keyof typeof Indicators]);
   public selectedIndicator: string = '';
   public trend: string = '';
+  public trendAverage: string = '';
 
   constructor(private loadCSVService: LoadCSVService,
     private patternService: PatternService,
@@ -59,7 +60,6 @@ export class ChartComponent implements OnInit {
       this.checkPoints();
     })
   }
-
 
   private createLineChart(): void {
     const fileName = this.loadCSVService.fileTitle;
@@ -101,8 +101,11 @@ export class ChartComponent implements OnInit {
       return;
 
     this.populateStockDataArrays();
-    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
-    const points = this.patternService.detectChangePoints(sma)
+    // const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    const line = this.chart.data.datasets.find((x: any) => x.id === this.linesArray[0].id)
+    if (line === undefined)
+      return;
+    const points = this.patternService.detectChangePoints(line.data);
 
     const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
     points.forEach(point => {
@@ -120,6 +123,7 @@ export class ChartComponent implements OnInit {
 
     const dataChart = this.chooseIndicator(lineChart.name, lineChart.length);
     line.data = dataChart;
+    line.label = lineChart.name + ' ' + lineChart.length;
 
     this.chart.update();
     this.calculateIndicators();
@@ -138,13 +142,14 @@ export class ChartComponent implements OnInit {
       }
     )
     const dataChart = this.chooseIndicator(indicator, length);
+    const color = this.randomColor();
 
     this.chart.data.datasets.push({
       id: id,
       label: indicator + ' ' + length,
       data: dataChart,
-      borderColor: this.randomColor(),
-      backgroundColor: this.randomColor(),
+      borderColor: color,
+      backgroundColor: color
     });
 
     this.chart.update();
@@ -174,7 +179,6 @@ export class ChartComponent implements OnInit {
   private calculateSMA(lengthSMA: number): number[] {
     const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
     sma.unshift(...new Array(lengthSMA).fill(null));
-    console.log(sma)
     return sma;
   }
 
@@ -223,8 +227,16 @@ export class ChartComponent implements OnInit {
   }
 
   private calculateIndicators() {
-    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
-    this.trend = this.patternService.isUpwardTrend(sma);
+    // const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    const line = this.chart.data.datasets.find((x: any) => x.id === this.linesArray[0].id)
+    if (line === undefined)
+      return;
+    this.trend = this.patternService.isUpwardTrend(line.data);
+    console.log(line.data[line.data.length - 1], this.stockValueArray[this.stockValueArray.length - 1])
+    const upwardTrend = line.data[line.data.length - 1] < this.stockValueArray[this.stockValueArray.length - 1] ? true : false;
+    console.log(upwardTrend)
+    this.trendAverage = 'Na podstawie średniej ' + line.label + '  trend jest ';
+    this.trendAverage += upwardTrend ? 'wzrostowy' : 'spadkowy';
     this.checkPoints();
   }
 }
