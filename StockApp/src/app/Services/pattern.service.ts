@@ -16,7 +16,6 @@ export class PatternService {
             const average = sum / windowSize;
             result.push(average);
         }
-
         return result;
     }
 
