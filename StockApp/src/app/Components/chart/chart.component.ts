@@ -53,6 +53,7 @@ export class ChartComponent implements OnInit {
     this.loadCSVService.getRecordsSubscribe().subscribe(res => {
       this.loadedStockData = res;
       this.applyChart();
+      this.checkPoints();
     })
   }
 
@@ -90,12 +91,23 @@ export class ChartComponent implements OnInit {
   }
 
   public applyChart() {
-    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-
-    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
-    this.stockValueArray = dataStock.map(x => x.close);
+    this.populateStockDataArrays();
     this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
+  }
+
+  private checkPoints() {
+    if (this.linesArray[0] === undefined)
+      return;
+
+    this.populateStockDataArrays();
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    const points = this.patternService.detectChangePoints(sma)
+
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    points.forEach(point => {
+      console.log(dataStock[point + this.linesArray[0].length])
+    });
   }
 
   public updateChart(lineChart: any) {
@@ -121,10 +133,20 @@ export class ChartComponent implements OnInit {
 
     this.chart.data.datasets.push({
       label: labelName,
-      data: dataChart
+      data: dataChart,
+      borderColor: this.randomColor(),
+      backgroundColor: this.randomColor(),
     });
 
     this.chart.update();
+  }
+
+  private randomColor(): string {
+    return 'rgba(' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.floor(Math.random() * 256) + ',' +
+      Math.random().toPrecision(2).slice(2, 4) + ')';
   }
 
   private chooseIndicator(indicator: string, length: number): number[] {
@@ -155,9 +177,7 @@ export class ChartComponent implements OnInit {
   }
 
   public changeDateChart() {
-    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
-    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
-    this.stockValueArray = dataStock.map(x => x.close);
+    this.populateStockDataArrays();
 
     this.chart.data.labels = this.dateTimeArray;
     this.chart.data.datasets[0].data = this.stockValueArray;
@@ -167,6 +187,14 @@ export class ChartComponent implements OnInit {
     }
 
     this.chart.update();
+
+    this.checkPoints();
+  }
+
+  private populateStockDataArrays() {
+    const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
+    this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
+    this.stockValueArray = dataStock.map(x => x.close);
   }
 
   public addIndicatorToChart(indicator: string) {
