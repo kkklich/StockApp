@@ -20,10 +20,11 @@
             <div class="indicators-container">
                 <div *ngFor="let lineChart of linesArray; let i = index" class="indicators">
                     <mat-form-field class="example-form-field indicators-select">
-                        <mat-label>Wybierz długość {{lineChart.name}} {{i}}</mat-label>
+                        <mat-label>Długość {{lineChart.name}} {{i}}</mat-label>
                         <input matInput type="number" min="1" [(ngModel)]="lineChart.length"
                             (change)="updateChart(lineChart)">
                     </mat-form-field>
+                    <mat-icon>close</mat-icon>
                     <br>
                 </div>
             </div>
