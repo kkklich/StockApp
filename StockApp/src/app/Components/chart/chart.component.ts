@@ -31,6 +31,7 @@ export class ChartComponent implements OnInit {
   private loadedStockData: stockData[] = [];
   public indicatorArray: string[] = Object.keys(Indicators).map(key => Indicators[key as keyof typeof Indicators]);
   public selectedIndicator: string = '';
+  public trend: string = '';
 
   constructor(private loadCSVService: LoadCSVService,
     private patternService: PatternService,
@@ -94,6 +95,7 @@ export class ChartComponent implements OnInit {
     this.populateStockDataArrays();
     this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
+    this.calculateIndicators();
   }
 
   private checkPoints() {
@@ -106,7 +108,8 @@ export class ChartComponent implements OnInit {
 
     const dataStock = this.loadedStockData.slice(-1 * this.quantityOfStockValue);
     points.forEach(point => {
-      console.log(dataStock[point + this.linesArray[0].length])
+      // log change points      
+      // console.log(dataStock[point + this.linesArray[0].length])
     });
   }
 
@@ -121,6 +124,7 @@ export class ChartComponent implements OnInit {
     line.data = dataChart;
 
     this.chart.update();
+    this.calculateIndicators();
   }
 
   private addIndicator(indicator: string) {
@@ -187,8 +191,7 @@ export class ChartComponent implements OnInit {
     }
 
     this.chart.update();
-
-    this.checkPoints();
+    this.calculateIndicators();
   }
 
   private populateStockDataArrays() {
@@ -201,5 +204,11 @@ export class ChartComponent implements OnInit {
     this.selectedIndicator = this.selectedIndicator.length ? `${this.selectedIndicator}, ${indicator}` : indicator;
 
     this.addIndicator(indicator);
+  }
+
+  private calculateIndicators() {
+    const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
+    this.trend = this.patternService.isUpwardTrend(sma);
+    this.checkPoints();
   }
 }

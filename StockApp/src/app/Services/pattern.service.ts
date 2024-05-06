@@ -74,13 +74,24 @@ export class PatternService {
         return changePoints;
     }
 
+    public isUpwardTrend(data: number[]): string {
+        const firstValue = data[0];
+        const lastValue = data[data.length - 1];
+        const diff = lastValue - firstValue;
+        const diffPercentage = ((diff / firstValue) * 100);
+        const trendStrength = diffPercentage.toFixed(2);
+
+        if (Math.abs(diffPercentage) < 5)
+            return `Boczny (${trendStrength}%)`;
+
+        const trendDirection = diff > 0 ? 'wzrostowy' : 'spadkowy';
+        return `${trendDirection} (${trendStrength}%)`;
+    }
 
     //wskażnik impetu RSI
     //oscylator stochastyczny
     //wskażnik zmienności ATR
     //wskażnik ADX
-
-
 
 
 }
