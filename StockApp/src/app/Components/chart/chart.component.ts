@@ -27,8 +27,8 @@ export class ChartComponent implements OnInit {
   private averageRolling: any[] = [];
   public lengthArray: number[] = [10, 20, 30, 50];
   public lengthChartSMA: number = 10;
-  // public linesArray: { length: number, name: string }[] = [{ length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
-  public linesArray: chartIndicatorModel[] = [];
+
+  public linesArray: chartIndicatorModel[] = [{ id: Math.random().toString(36).substr(2, 9), length: this.lengthChartSMA, name: 'SMA ' + this.lengthChartSMA }];
   private loadedStockData: stockData[] = [];
   public indicatorArray: string[] = ['SMA', 'EMA', 'ESA', 'WMA'];
   public selectedIndicator: string = '';
@@ -61,7 +61,6 @@ export class ChartComponent implements OnInit {
   private createLineChart(): void {
     const nameLine = "SMA " + this.lengthChartSMA;
     const fileName = this.loadCSVService.fileTitle;
-    console.log('create', this.stockValueArray)
 
     if (this.chart != undefined)
       this.chart.destroy();
@@ -74,10 +73,10 @@ export class ChartComponent implements OnInit {
           label: fileName,
           data: this.stockValueArray
         },
-          // {
-          //   label: nameLine,
-          //   data: this.averageRolling,
-          // }
+        {
+          label: nameLine,
+          data: this.averageRolling,
+        }
         ],
       },
       options: {
@@ -96,25 +95,17 @@ export class ChartComponent implements OnInit {
 
     this.dateTimeArray = dataStock.map(y => y.date.toLocaleDateString('pl-PL'));
     this.stockValueArray = dataStock.map(x => x.close);
-    // this.averageRolling = this.calculateEMA(this.lengthChartSMA);
-    // this.averageRolling = this.calculateSMA(this.lengthChartSMA);
+    this.averageRolling = this.calculateSMA(this.lengthChartSMA);
     this.createLineChart();
   }
 
   public updateChart(lineChart: chartIndicatorModel) {
     if (lineChart.length < 1)
       return;
-    console.log(lineChart)
-    console.log(this.chart.data.datasets)
-    // const line = this.chart.data.datasets.find((x: any) => x.label == lineChart.name)
     const line = this.chart.data.datasets.find((x: any) => x.id == lineChart.id)
     if (line === undefined)
       return;
 
-    console.log(line)
-
-    // const dataChart = this.calculateEMA(lineChart.length);
-    // const dataChart = this.calculateSMA(lineChart.length);
     const dataChart = this.chooseIndicator(lineChart);
     line.data = dataChart;
 
@@ -125,8 +116,6 @@ export class ChartComponent implements OnInit {
     if (this.chart === undefined)
       return;
     const length = 20;
-    // const labelName = indicator + ' ' + length + ' ' + this.linesArray.length + 1;
-    // const labelName = indicator;
     const id = Math.random().toString(36).substr(2, 9);
     this.linesArray.push(
       {
@@ -148,7 +137,6 @@ export class ChartComponent implements OnInit {
   }
 
   private chooseIndicator(indicator: chartIndicatorModel): number[] {
-    console.log(indicator, length)
     switch (indicator.name) {
       case 'SMA':
         return this.calculateSMA(indicator.length);
@@ -162,7 +150,6 @@ export class ChartComponent implements OnInit {
   }
 
   private calculateSMA(lengthSMA: number): number[] {
-    console.log(this.stockValueArray, lengthSMA)
     const sma = this.patternService.calculateAverageRolling(this.stockValueArray, lengthSMA);
     sma.unshift(...new Array(lengthSMA).fill(null));
     console.log(sma)

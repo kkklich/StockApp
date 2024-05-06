@@ -38,7 +38,6 @@ export class MainPageComponent {
   }
 
   public changeCompany() {
-    console.log(this.selectedCompany)
     this.chartService.getAPICompanyRequest(this.selectedCompany.ticker);
   }
 
