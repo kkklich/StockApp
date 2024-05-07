@@ -86,7 +86,8 @@ export class ChartComponent implements OnInit {
       }
     });
 
-    this.addIndicator(Indicators.SMA);
+    // this.addIndicator(Indicators.SMA);
+    this.addTwoMovingAverges();
   }
 
   public applyChart() {
@@ -129,10 +130,9 @@ export class ChartComponent implements OnInit {
     this.calculateIndicators();
   }
 
-  private addIndicator(indicator: string) {
+  private addIndicator(indicator: string, length: number = 20) {
     if (this.chart === undefined)
       return;
-    const length = 20;
     const id = Math.random().toString(36).substr(2, 9);
     this.linesArray.push(
       {
@@ -238,5 +238,10 @@ export class ChartComponent implements OnInit {
     this.trendAverage = 'Na podstawie średniej ' + line.label + '  trend jest ';
     this.trendAverage += upwardTrend ? 'wzrostowy' : 'spadkowy';
     this.checkPoints();
+  }
+
+  private addTwoMovingAverges() {
+    this.addIndicator(Indicators.SMA, 20);
+    this.addIndicator(Indicators.EMA, 20);
   }
 }
