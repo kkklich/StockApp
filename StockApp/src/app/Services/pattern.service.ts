@@ -73,8 +73,8 @@ export class PatternService {
         return changePoints;
     }
 
-    public isUpwardTrend(data: number[]): string {
-        const firstValue = data[0];
+    public showTrend(data: number[], lengthAverge: number): string {
+        const firstValue = data[lengthAverge];
         const lastValue = data[data.length - 1];
         const diff = lastValue - firstValue;
         const diffPercentage = ((diff / firstValue) * 100);
@@ -84,9 +84,8 @@ export class PatternService {
             return `Boczny (${trendStrength}%)`;
 
         const trendDirection = diff > 0 ? 'wzrostowy' : 'spadkowy';
-        return trendDirection;
-    };
-    // return `${trendDirection} (${trendStrength}%)`;
+        return `${trendDirection} (${trendStrength}%)`;
+    }
 
 
     //wskażnik impetu RSI

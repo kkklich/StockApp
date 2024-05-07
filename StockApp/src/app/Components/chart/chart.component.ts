@@ -227,14 +227,14 @@ export class ChartComponent implements OnInit {
   }
 
   private calculateIndicators() {
-    // const sma = this.patternService.calculateAverageRolling(this.stockValueArray, this.linesArray[0].length);
     const line = this.chart.data.datasets.find((x: any) => x.id === this.linesArray[0].id)
     if (line === undefined)
       return;
-    this.trend = this.patternService.isUpwardTrend(line.data);
-    console.log(line.data[line.data.length - 1], this.stockValueArray[this.stockValueArray.length - 1])
-    const upwardTrend = line.data[line.data.length - 1] < this.stockValueArray[this.stockValueArray.length - 1] ? true : false;
-    console.log(upwardTrend)
+    const lineChart = this.linesArray.find(x => x.id === this.linesArray[0].id)
+    if (lineChart === undefined)
+      return;
+    this.trend = this.patternService.showTrend(line.data, lineChart.length);
+    const upwardTrend = line.data[lineChart.length] < this.stockValueArray[this.stockValueArray.length - 1] ? true : false;
     this.trendAverage = 'Na podstawie średniej ' + line.label + '  trend jest ';
     this.trendAverage += upwardTrend ? 'wzrostowy' : 'spadkowy';
     this.checkPoints();
