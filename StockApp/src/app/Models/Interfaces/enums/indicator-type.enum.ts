@@ -1,5 +1,6 @@
 export enum Indicators {
     SMA = 'SMA',
     EMA = 'EMA',
-    WMA = 'WMA'
+    WMA = 'WMA',
+    RSI = 'RSI'
 }

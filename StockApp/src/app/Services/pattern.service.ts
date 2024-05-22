@@ -56,6 +56,57 @@ export class PatternService {
         return emaValues;
     }
 
+    public calculateRSI(data: number[], window: number = 14): number[] {
+        console.log(data)
+        if (data.length < window) {
+            throw new Error('Data length must be greater than the window period.');
+        }
+
+        const rsi: number[] = [];
+        let gains: number[] = [];
+        let losses: number[] = [];
+
+        // Calculate initial gains and losses
+        for (let i = 1; i <= window; i++) {
+            const delta = data[i] - data[i - 1];
+            if (delta > 0) {
+                gains.push(delta);
+                losses.push(0);
+            } else {
+                gains.push(0);
+                losses.push(-delta);
+            }
+        }
+
+        let avgGain = gains.reduce((a, b) => a + b, 0) / window;
+        let avgLoss = losses.reduce((a, b) => a + b, 0) / window;
+
+        rsi.push(100 - 100 / (1 + avgGain / avgLoss));
+
+        // Calculate RSI for the rest of the data
+        for (let i = window + 1; i < data.length; i++) {
+            const delta = data[i] - data[i - 1];
+            let gain = 0;
+            let loss = 0;
+
+            if (delta > 0) {
+                gain = delta;
+            } else {
+                loss = -delta;
+            }
+
+            avgGain = (avgGain * (window - 1) + gain) / window;
+            avgLoss = (avgLoss * (window - 1) + loss) / window;
+
+            rsi.push(100 - 100 / (1 + avgGain / avgLoss));
+        }
+
+        const emptyValues = Array(window).fill(null);
+        const paddedRSI = emptyValues.concat(rsi);
+
+        return paddedRSI;
+    }
+
     private calculateSlope(point1: [number, number], point2: [number, number]): number {
         return (point2[1] - point1[1]) / (point2[0] - point1[0]);
     }

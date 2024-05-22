@@ -171,6 +171,8 @@ export class ChartComponent implements OnInit {
         return this.calculateWMA(length);
       case Indicators.EMA:
         return this.calculateEMA(length);
+      case Indicators.RSI:
+        return this.calculateRSI(length);
       default:
         return [];
     }
@@ -188,6 +190,9 @@ export class ChartComponent implements OnInit {
 
   private calculateEMA(lengthWMA: number): number[] {
     return this.patternService.exponentialMovingAverage(this.stockValueArray, lengthWMA);
+  }
+  private calculateRSI(length: number): number[] {
+    return this.patternService.calculateRSI(this.stockValueArray, length);
   }
 
   public changeDateChart() {
