@@ -8,7 +8,6 @@
 </head>
 
 <body class="is-preload">
-
     <header id="header">
         <div class="inner">
             <a href="#" class="image avatar"></a>
@@ -25,7 +24,6 @@
             </header>
             <p>W program ten będzie obliczał wskaźniki analizy technicznej na podstawie aktualnych danych
             </p>
-
         </section>
 
         <section id="two">
@@ -39,17 +37,9 @@
                 </article>
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
-                    <!-- <h3>Ważona średnia krocząca</h3>
-                    <p>Srednią ważoną kroczącą jest ....</p> -->
                 </article>
             </div>
         </section>
-        <mat-form-field>
-            <mat-label>Wybierz firmę: </mat-label>
-            <mat-select [(ngModel)]="selectedCompany" (selectionChange)="changeCompany()">
-                <mat-option *ngFor="let company of companyList" [value]="company">{{company.name}}</mat-option>
-            </mat-select>
-        </mat-form-field>
         <app-chart></app-chart>
 
         <!-- Three -->

@@ -19,24 +19,23 @@ export class PatternService {
         return result;
     }
 
-
     // ważona średnia ruchoma
-    public weightedMovingAverage(data: number[], length: number): number[] {
-        const result: number[] = [];
-        let sum = 0;
-        let weights = 0;
+    public weightedMovingAverage(data: number[], period: number): number[] {
+        const wma: number[] = [];
+        const weightSum = (period * (period + 1)) / 2; // Sum of weights
 
-        for (let i = 0; i < data.length; i++) {
-            if (i >= length) {
-                sum -= data[i - length];
-                weights--;
+        for (let i = period; i <= data.length; i++) {
+            let weightedSum = 0;
+
+            for (let j = 0; j < period; j++) {
+                weightedSum += data[i - j - 1] * (period - j);
             }
-            sum += data[i];
-            weights++;
-            result.push(sum / weights);
-        }
 
-        return result;
+            wma.push(weightedSum / weightSum);
+        }
+        wma.unshift(...new Array(period).fill(null));
+
+        return wma;
     }
 
     //wykladnicza srednia ruchoma
@@ -56,55 +55,56 @@ export class PatternService {
         return emaValues;
     }
 
-    public calculateRSI(data: number[], window: number = 14): number[] {
-        console.log(data)
-        if (data.length < window) {
-            throw new Error('Data length must be greater than the window period.');
+    public calculateRSI(prices: number[], period: number = 14): number[] {
+        if (prices.length < period) {
+            throw new Error("Not enough data points to calculate RSI");
         }
 
-        const rsi: number[] = [];
-        let gains: number[] = [];
-        let losses: number[] = [];
+        const rsi: number[] = new Array(prices.length).fill(undefined);
 
-        // Calculate initial gains and losses
-        for (let i = 1; i <= window; i++) {
-            const delta = data[i] - data[i - 1];
-            if (delta > 0) {
-                gains.push(delta);
-                losses.push(0);
+        let gains = 0;
+        let losses = 0;
+
+        for (let i = 1; i <= period; i++) {
+            const change = prices[i] - prices[i - 1];
+            if (change > 0) {
+                gains += change;
             } else {
-                gains.push(0);
-                losses.push(-delta);
+                losses -= change;
             }
         }
 
-        let avgGain = gains.reduce((a, b) => a + b, 0) / window;
-        let avgLoss = losses.reduce((a, b) => a + b, 0) / window;
+        let averageGain = gains / period;
+        let averageLoss = losses / period;
+        rsi[period] = this.calculateRSIValue(averageGain, averageLoss);
 
-        rsi.push(100 - 100 / (1 + avgGain / avgLoss));
-
-        // Calculate RSI for the rest of the data
-        for (let i = window + 1; i < data.length; i++) {
-            const delta = data[i] - data[i - 1];
+        for (let i = period + 1; i < prices.length; i++) {
+            const change = prices[i] - prices[i - 1];
             let gain = 0;
             let loss = 0;
 
-            if (delta > 0) {
-                gain = delta;
+            if (change > 0) {
+                gain = change;
             } else {
-                loss = -delta;
+                loss = -change;
             }
 
-            avgGain = (avgGain * (window - 1) + gain) / window;
-            avgLoss = (avgLoss * (window - 1) + loss) / window;
+            averageGain = (averageGain * (period - 1) + gain) / period;
+            averageLoss = (averageLoss * (period - 1) + loss) / period;
 
-            rsi.push(100 - 100 / (1 + avgGain / avgLoss));
+            rsi[i] = this.calculateRSIValue(averageGain, averageLoss);
         }
 
-        const emptyValues = Array(window).fill(null);
-        const paddedRSI = emptyValues.concat(rsi);
+        return rsi;
+    }
 
-        return paddedRSI;
+    calculateRSIValue(averageGain: number, averageLoss: number): number {
+        if (averageLoss === 0) {
+            return 100;
+        }
+
+        const rs = averageGain / averageLoss;
+        return 100 - (100 / (1 + rs));
     }
 
     private calculateSlope(point1: [number, number], point2: [number, number]): number {
@@ -137,12 +137,4 @@ export class PatternService {
         const trendDirection = diff > 0 ? 'wzrostowy' : 'spadkowy';
         return `${trendDirection} (${trendStrength}%)`;
     }
-
-
-    //wskażnik impetu RSI
-    //oscylator stochastyczny
-    //wskażnik zmienności ATR
-    //wskażnik ADX
-
-
 }

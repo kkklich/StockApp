@@ -15,7 +15,6 @@ export class ChartService {
 
     constructor(private apiHttpService: ApiHttpService) { }
 
-
     public getStooqDateSubscribe(): Observable<stockData[]> {
         return this.stooqSubscription;
     }
