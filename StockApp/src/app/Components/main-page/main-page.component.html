@@ -10,20 +10,13 @@
 <body class="is-preload">
     <header id="header">
         <div class="inner">
-            <a href="#" class="image avatar"></a>
-            <h1><strong>Krzysztof Klich</strong><br />
-                praca magisterska<br />
-            </h1>
+
         </div>
     </header>
 
     <div id="main">
         <section id="one">
-            <header class="major">
-                <h3>Witam jest Krzytszof Klich</h3>
-            </header>
-            <p>W program ten będzie obliczał wskaźniki analizy technicznej na podstawie aktualnych danych
-            </p>
+
         </section>
 
         <section id="two">
@@ -32,8 +25,18 @@
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
                     <h3>Wczytaj plik CSV</h3>
-                    <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="dowloadCSV($event)"
+                    <input type="file" #csvReader name="Upload CSV" id="txtFileUpload" (change)="uploadCSV($event)"
                         accept=".csv" />
+                </article>
+                <article>
+                    <mat-form-field class="company-form-field">
+                        <mat-label>Wybierz firme:</mat-label>
+                        <mat-select [(ngModel)]="selectedCompany" (selectionChange)="changeCompany()">
+                            <mat-option *ngFor="let company of companyList" [value]="company">
+                                {{ company.name }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </article>
                 <article class="col-6 col-12-xsmall work-item">
                     <a class="image fit thumb"><img alt="" /></a>
@@ -44,42 +47,7 @@
 
         <!-- Three -->
         <section id="three">
-            <h2>Skontaktuj się ze mną</h2>
-            <p>Zapraszam do kontaktu</p>
-            <div class="row">
-                <div class="col-8 col-12-small">
-                    <form method="post" action="#">
-                        <div class="row gtr-uniform gtr-50">
-                            <div class="col-6 col-12-xsmall"><input type="text" name="name" id="name"
-                                    placeholder="Name" /></div>
-                            <div class="col-6 col-12-xsmall"><input type="email" name="email" id="email"
-                                    placeholder="Email" /></div>
-                            <div class="col-12"><textarea name="message" id="message" placeholder="Message"
-                                    rows="4"></textarea></div>
-                        </div>
-                    </form>
-                    <ul class="actions">
-                        <li><input type="submit" value="Send Message" /></li>
-                    </ul>
-                </div>
-                <div class="col-4 col-12-small">
-                    <ul class="labeled-icons">
-                        <li>
-                            <h3 class="icon solid fa-home"><span class="label">Address</span></h3>
-                            Katowice<br />
-                            Polska
-                        </li>
-                        <li>
-                            <h3 class="icon solid fa-mobile-alt"><span class="label">Phone</span></h3>
-                            784-895-309
-                        </li>
-                        <li>
-                            <h3 class="icon solid fa-envelope"><span class="label">Email</span></h3>
-                            <a href="#">{{'Krzysztof.klich@edu.uekat.pl'}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+
         </section>
 
     </div>

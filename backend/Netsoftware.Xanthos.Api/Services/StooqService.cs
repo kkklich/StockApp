@@ -3,6 +3,7 @@ using System.Linq;
 using System;
 using Netsoftware.Xanthos.Infrastructure.Dto;
 using System.Drawing;
+using System.Threading.Tasks;
 
 namespace Netsoftware.Xanthos.Api.Services
 {
@@ -32,6 +33,12 @@ namespace Netsoftware.Xanthos.Api.Services
 			}
 
 			return stockDataList;
+		}
+
+		public async Task<List<StooqModel>> GetDataFromAPI(string ticker, string period)
+		{
+
+			return null;
 		}
 	}
 }

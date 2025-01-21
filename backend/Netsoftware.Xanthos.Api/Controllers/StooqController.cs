@@ -4,6 +4,7 @@ using Netsoftware.Xanthos.Api.Services;
 using Netsoftware.Xanthos.Common.HttpClient;
 using Netsoftware.Xanthos.Infrastructure.Dto;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -44,6 +45,19 @@ namespace Netsoftware.Xanthos.Api.Controllers
 			var chartData = _stooqService.ParseCsvData(result);
 
 			return chartData;
+		}
+
+		[HttpGet("GetStock/{ticker}/{period}")]
+		public async Task<IActionResult> GetStock(string ticker, string period)
+		{
+			try
+			{
+				var data = await _stooqService.GetDataFromAPI(ticker, period);
+				return Ok(data);
+			}catch(Exception f)			
+			{
+				return BadRequest(f.Message);
+			}
 		}
 	}
 }

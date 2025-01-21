@@ -31,8 +31,8 @@ var sharedSettingsPath = Path.Combine(parentFolder, "sharedsettings.json");
 var configuration = builder.Configuration;
 
 configuration
-    .AddJsonFile(sharedSettingsPath, true)
-    .AddJsonFile("sharedsettings.json", true)
+    //.AddJsonFile(sharedSettingsPath, true)
+    //.AddJsonFile("sharedsettings.json", true)
     .AddJsonFile("appsettings.json", true)
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}", true)
     .AddEnvironmentVariables();
@@ -47,14 +47,14 @@ services
         var filePath = Path.Combine(AppContext.BaseDirectory, "Netsoftware.Xanthos.Api.xml");
         c.IncludeXmlComments(filePath);
     })
-    .AddDatabase<ApplicationDbContext>(configuration, "DatabaseAppstation")
+    //.AddDatabase<ApplicationDbContext>(configuration, "DatabaseAppstation")
     .AddCorsPolicies()
     .AddExternalApiUrlsModule(configuration)
     .AddApplicationInstanceModule()
-    .AddEmailSenderModule(configuration)
-    .AddEmailQueueModule(configuration)
-    .AddEmailQueueHostServiceModule(configuration)
-    .AddTransient<IDbInitializer, DbInitializer>()
+    //.AddEmailSenderModule(configuration)
+    //.AddEmailQueueModule(configuration)
+    //.AddEmailQueueHostServiceModule(configuration)
+    //.AddTransient<IDbInitializer, DbInitializer>()
     .AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>))
     .AddScoped<ProtoService>()
     .AddScoped<StooqService>()

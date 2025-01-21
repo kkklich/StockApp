@@ -31,7 +31,7 @@ export class MainPageComponent {
     })
   }
 
-  public dowloadCSV(event: any) {
+  public uploadCSV(event: any) {
     this.loadCSV.uploadDocument(event).then(res => {
       this.records = res;
     });
