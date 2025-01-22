@@ -24,6 +24,7 @@ export class ChartService {
             prefix: companyPrefix,
             interval: Interval.day
         }
+
         this.apiHttpService.post<stockData[]>(`${environment.apiUrl}Stooq/GetStockData`, model).subscribe(result => {
             this.loadedStockData = [];
             result.map(x => x.date = new Date(x.date));
