@@ -40,7 +40,8 @@ export class LoadCSVService {
             let csvRecordsArray = (<string>csvData).split(/\r\n|\n/);
             let headersRow = this.getHeaderArray(csvRecordsArray);
 
-            this.records = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+            const recordsData = this.getDataRecordsArrayFromCSVFile(csvRecordsArray, headersRow.length);
+            this.records = Object.values(recordsData);
             this.recordsSubscription.next(this.records);
             resolve(this.records);
           } catch (err) {

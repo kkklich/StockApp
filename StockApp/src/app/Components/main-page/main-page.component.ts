@@ -41,10 +41,11 @@ export class MainPageComponent {
     this.chartService.getAPICompanyRequest(this.selectedCompany.ticker);
   }
 
-  public async loadJSONFile(fileName: string): Promise<Array<CompaniesTickerModel>> {
+  public async loadJSONFile(fileName: string): Promise<CompaniesTickerModel[]> {
+    console.log('xxx', fileName)
     return new Promise(async (resolve, reject) => {
       try {
-        const data: Array<CompaniesTickerModel> = await firstValueFrom(this.apiHttpService.get(`/assets/${fileName}`));
+        const data: CompaniesTickerModel[] = await firstValueFrom(this.apiHttpService.get(`/assets/${fileName}`));
         resolve(data);
       } catch (e) {
         reject(e);

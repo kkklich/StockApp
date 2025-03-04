@@ -60,6 +60,8 @@ export class ChartComponent implements OnInit {
   private createLineChart(): void {
     const fileName = this.loadCSVService.fileTitle;
 
+    console.log(fileName);
+
     if (this.chart != undefined)
       this.chart.destroy();
 
@@ -82,7 +84,9 @@ export class ChartComponent implements OnInit {
       }
     });
 
-    this.addTwoMovingAverges();
+    console.log(this.chart);
+
+    // this.addTwoMovingAverges();
   }
 
   public applyChart() {

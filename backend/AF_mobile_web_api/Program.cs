@@ -1,4 +1,3 @@
-using AF_mobile_web_api_Database;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
