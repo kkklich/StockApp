@@ -25,11 +25,13 @@ export class ChartService {
             interval: Interval.day
         }
 
-        this.apiHttpService.post<stockData[]>(`${environment.apiUrl}Stooq/GetStockData`, model).subscribe(result => {
-            this.loadedStockData = [];
-            result.map(x => x.date = new Date(x.date));
-            this.loadedStockData = result;
-            this.stooqSubscription.next(this.loadedStockData)
+        console.log(model)
+        this.apiHttpService.get<any>(`${environment.apiUrl}quotes/GetStockData?prefix=${companyPrefix}&&interval=${Interval.day}`).subscribe(result => {
+            console.log(result);
+            // this.loadedStockData = [];
+            // result.map(x => x.date = new Date(x.date));
+            // this.loadedStockData = result;
+            // this.stooqSubscription.next(this.loadedStockData)
         })
     }
 }
