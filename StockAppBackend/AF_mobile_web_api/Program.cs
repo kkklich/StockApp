@@ -1,8 +1,17 @@
+using AF_mobile_web_api_Application.Services;
+using AF_mobile_web_api_Application.Services.Interfaces;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+
+builder.Services.AddHttpClient();
+
+// Register your services here
+builder.Services.AddScoped<IQuotesServices, QuotesServices>();
+builder.Services.AddScoped<IIndicatorsServices, IndicatorsServices> ();
 
 builder.Services.AddControllers();
 builder.Logging.ClearProviders();
