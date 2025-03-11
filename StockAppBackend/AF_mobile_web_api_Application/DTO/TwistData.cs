@@ -1,0 +1,19 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AF_mobile_web_api_Application.DTO
+{
+    public class TwistData
+    {
+        public decimal High { get; set; }
+        public decimal Last { get; set; }
+        public long Volume { get; set; }
+        public long Tm { get; set; }
+        public decimal Low { get; set; }
+        public DateTime Date { get; set; }
+        public decimal Open { get; set; }
+    }
+}
