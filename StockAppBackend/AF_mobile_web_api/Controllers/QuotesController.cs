@@ -23,11 +23,11 @@ namespace AF_mobile_web_api.Controllers
         }
 
         [HttpGet("GetStockData")]
-        public async Task<IActionResult> GetStockData([FromQuery] string prefix, [FromQuery] string interval)
+        public async Task<IActionResult> GetStockData([FromQuery] string prefix, [FromQuery] string interval, [FromQuery] string from = "", [FromQuery] string to = "")
         {
             try
             {
-                var quotes = await _quotesServices.GetStockData(prefix, interval);
+                var quotes = await _quotesServices.GetStockData(prefix, interval, from, to);
                 return Ok(quotes);
             }
             catch (Exception ex)
@@ -56,6 +56,20 @@ namespace AF_mobile_web_api.Controllers
             try
             {
                 var quotes = await _quotesServices.CheckBackground(prefix, interval, date);
+                return Ok(quotes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("FindHammers")]
+        public async Task<IActionResult> FindHammers([FromQuery] string prefix, [FromQuery] string interval, [FromQuery] string from = "", [FromQuery] string to = "")
+        {
+            try
+            {
+                var quotes = await _quotesServices.FindHammers(prefix, interval, from, to);
                 return Ok(quotes);
             }
             catch (Exception ex)

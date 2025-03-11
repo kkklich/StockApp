@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,31 +22,97 @@ namespace AF_mobile_web_api_Application.Services
             _indicatorsServices = indicatorsServices;
         }
 
-        public async Task<List<TwistData>> GetStockData(string symbol, string zoom)
+        public async Task<List<StockDataIndicators>> GetStockData(string symbol, string zoom, string from = "", string to = "")
         {
             try
             {
-                var url = BuildUrlStockTwist(symbol, zoom);
+                //var url = BuildUrlStockTwist(symbol, zoom); //TODO TWIST
+                var url = BuildUrlStockWatch(symbol, zoom, from, to);
                 var response = await _httpClient.GetAsync(url);
 
                 response.EnsureSuccessStatusCode();
 
                 var jsonResponse = await response.Content.ReadAsStringAsync();
-                var stockDataList = JsonConvert.DeserializeObject<List<TwistData>>(jsonResponse);
+                //var stockDataList = JsonConvert.DeserializeObject<List<TwistData>>(jsonResponse); TODO  //ConvertToStockDataIndicators
+                var stockDataList = JsonConvert.DeserializeObject<StockWatch>(jsonResponse);
+                var convertedData = ConvertStockWatch(stockDataList);
 
-                return stockDataList;
+                return convertedData;
             }
             catch (Exception ex)
             {
-                throw;
+                throw new ArgumentException(ex.Message);
             }
         }
+
+        private List<StockDataIndicators> ConvertStockWatch(StockWatch stockData)
+        {
+            var stockDataIndicators = new List<StockDataIndicators>();
+            for (int i = 0; i < stockData.Quotes.Count; i++)
+            {
+                stockDataIndicators.Add(new StockDataIndicators
+                {
+                    High = stockData.Quotes[i].High ,
+                    Close = stockData.Quotes[i].Close,
+                    Volume = stockData.Volume.FirstOrDefault(x => x.Time == stockData.Quotes[i].Time)?.Value ?? 0,                    
+                    Low = stockData.Quotes[i].Low,
+                    Date = stockData.Quotes[i].Time,
+                    Open = stockData.Quotes[i].Open,
+                    EMA = 0,
+                });
+            }
+            return stockDataIndicators;
+        }
+
+
+        private List<StockDataIndicators> ConvertTwist(List<TwistData> stockData)
+        {
+            var stockDataIndicators = new List<StockDataIndicators>();
+            for (int i = 0; i < stockData.Count; i++)
+            {
+                stockDataIndicators.Add(new StockDataIndicators
+                {
+                    High = stockData[i].High,
+                    Close = stockData[i].Last,
+                    Volume = stockData[i].Volume,
+                    Low = stockData[i].Low,
+                    Date = stockData[i].Date,
+                    Open = stockData[i].Open,
+                    EMA =  0,
+                });
+            }
+            return stockDataIndicators;
+        }
+
+        private string BuildUrlStockTwist(string symbol, string zoom)
+        {
+            var uriBuilder = new UriBuilder(ConstantHelper.StockTwist);
+            var query = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["symbol"] = symbol;
+            query["zoom"] = zoom;
+            uriBuilder.Query = query.ToString();
+
+            return uriBuilder.ToString();
+        }
+        private string BuildUrlStockWatch(string symbol, string zoom, string from, string to)
+        {
+            var uriBuilder = new UriBuilder(ConstantHelper.StockWacth);
+            var query = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["Symbol"] = symbol;
+            query["Resolution"] = zoom;
+            query["From"] = from;
+            query["To"] = to;
+            uriBuilder.Query = query.ToString();
+
+            return uriBuilder.ToString();
+        }
+
         public async Task<List<StockDataIndicators>> GetStockEMA(string symbol, string zoom, int period)
         {
             try
             {
-                var stockData = await GetStockData(symbol, zoom);
-                var closePrices = stockData.Select(x => x.Last).ToList();
+                var stockData = await GetStockData(symbol, zoom, "","");
+                var closePrices = stockData.Select(x => x.Close).ToList();
                 var ema = _indicatorsServices.CalculateEma(closePrices, period);
 
                 var stockDataWithIndicators = new List<StockDataIndicators>();
@@ -55,9 +122,8 @@ namespace AF_mobile_web_api_Application.Services
                     stockDataWithIndicators.Add(new StockDataIndicators
                     {
                         High = stockData[i].High,
-                        Last = stockData[i].Last,
+                        Close = stockData[i].Close,
                         Volume = stockData[i].Volume,
-                        Tm = stockData[i].Tm,
                         Low = stockData[i].Low,
                         Date = stockData[i].Date,
                         Open = stockData[i].Open,
@@ -69,7 +135,7 @@ namespace AF_mobile_web_api_Application.Services
             }
             catch (Exception ex) 
             {
-                throw;
+                throw new ArgumentException(ex.Message);
             }
         }
 
@@ -84,8 +150,8 @@ namespace AF_mobile_web_api_Application.Services
                 
                 date = DateTime.Parse(dateString);
                 var indicatorStock = await GetStockEMA(symbol, zoom, period);
-                //var isUp = _indicatorsServices.IsBackgroundUpAdvance(indicatorStock, date, period);
-                var isUp = _indicatorsServices.IsBackgroundUp(indicatorStock, date, period);
+                var isUp = _indicatorsServices.IsBackgroundUpAdvance(indicatorStock, date, period);
+                //var isUp = _indicatorsServices.IsBackgroundUp(indicatorStock, date, period);
                 
                 var targetDay = indicatorStock.FirstOrDefault(d => d.Date.Date == date.Date);
                 if(targetDay != null) 
@@ -93,21 +159,29 @@ namespace AF_mobile_web_api_Application.Services
 
                 return targetDay ?? new StockDataIndicators();
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw new ArgumentException(ex.Message);
             }
         }
 
-        private string BuildUrlStockTwist(string symbol, string zoom)
+        public async Task<List<StockDataIndicators>> FindHammers(string symbol, string zoom, string from, string to)
         {
-            var uriBuilder = new UriBuilder(ConstantHelper.StockTwist);
-            var query = System.Web.HttpUtility.ParseQueryString(uriBuilder.Query);
-            query["symbol"] = symbol;
-            query["zoom"] = zoom;
-            uriBuilder.Query = query.ToString();
-
-            return uriBuilder.ToString();
-        }
+            try
+            {
+                var stockData = await GetStockData(symbol, zoom, from, to);
+                //TODO check volume
+                var hammerCandles = stockData.Where(candle => 
+                    _indicatorsServices.IsHammer(candle) &&
+                    _indicatorsServices.CalculateAverageVolume(stockData, candle.Date, 40) < candle.Volume)
+                    .ToList();
+                return hammerCandles;
+            }
+            catch(Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+        }        
+    
     }
 }

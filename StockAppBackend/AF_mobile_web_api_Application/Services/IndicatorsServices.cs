@@ -3,6 +3,7 @@ using AF_mobile_web_api_Application.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -54,8 +55,8 @@ namespace AF_mobile_web_api_Application.Services
             // Implement VSA logic to analyze the background
             // This is a simplified example and should be expanded with real VSA analysis
 
-            var accumulation = previousDays.Count(d => d.Last > d.Open && d.Volume > previousDays.Average(p => p.Volume));
-            var distribution = previousDays.Count(d => d.Last < d.Open && d.Volume > previousDays.Average(p => p.Volume));
+            var accumulation = previousDays.Count(d => d.Close > d.Open && d.Volume > previousDays.Average(p => p.Volume));
+            var distribution = previousDays.Count(d => d.Close < d.Open && d.Volume > previousDays.Average(p => p.Volume));
 
             return accumulation > distribution;
         }
@@ -87,32 +88,32 @@ namespace AF_mobile_web_api_Application.Services
                 if (previous != null)
                 {
                     // Buying Climax
-                    if (current.Last > current.Open && current.Volume > previous.Volume * 2 && current.High > previous.High)
+                    if (current.Close > current.Open && current.Volume > previous.Volume * 2 && current.High > previous.High)
                     {
                         accumulationCount++;
                     }
                     // Selling Climax
-                    if (current.Last < current.Open && current.Volume > previous.Volume * 2 && current.Low < previous.Low)
+                    if (current.Close < current.Open && current.Volume > previous.Volume * 2 && current.Low < previous.Low)
                     {
                         distributionCount++;
                     }
                     // No Demand
-                    if (current.Last > current.Open && current.Volume < previous.Volume * 0.5 && current.High <= previous.High)
+                    if (current.Close > current.Open && current.Volume < previous.Volume * 0.5 && current.High <= previous.High)
                     {
                         distributionCount++;
                     }
                     // No Supply
-                    if (current.Last < current.Open && current.Volume < previous.Volume * 0.5 && current.Low >= previous.Low)
+                    if (current.Close < current.Open && current.Volume < previous.Volume * 0.5 && current.Low >= previous.Low)
                     {
                         accumulationCount++;
                     }
                     // Upthrust
-                    if (current.Last < current.Open && current.Volume > previous.Volume && current.High > previous.High)
+                    if (current.Close < current.Open && current.Volume > previous.Volume && current.High > previous.High)
                     {
                         distributionCount++;
                     }
                     // Test for Supply
-                    if (current.Last > current.Open && current.Volume < previous.Volume && current.Low < previous.Low)
+                    if (current.Close > current.Open && current.Volume < previous.Volume && current.Low < previous.Low)
                     {
                         accumulationCount++;
                     }
@@ -120,6 +121,56 @@ namespace AF_mobile_web_api_Application.Services
             }
 
             return accumulationCount > distributionCount;
+        }
+
+        public bool IsHammer(StockDataIndicators candle)
+        {
+            decimal bodyLength = Math.Abs(candle.Close - candle.Open);
+            decimal lowerShadow = Math.Min(candle.Open, candle.Close) - candle.Low;
+            decimal upperShadow = candle.High - Math.Max(candle.Open, candle.Close);
+
+            return lowerShadow > 2 * bodyLength && upperShadow < bodyLength;
+        }
+
+        public decimal CalculateAverageVolume(List<StockDataIndicators> stockData, DateTime startDate, int periods = 40)
+        {
+            var selectedPeriodData = stockData
+                .Where(candle => candle.Date <= startDate)
+                .OrderByDescending(candle => candle.Date)
+                .Take(periods)
+                .ToList();
+
+            //if (selectedPeriodData.Count < periods)
+            //{
+            //    throw new ArgumentException("Not enough data to calculate the average volume.");
+            //}
+
+            long totalVolume = selectedPeriodData.Sum(candle => candle.Volume);
+            return totalVolume / (decimal)periods;
+        }
+
+        public decimal CalculateVolumeQuartile(List<StockDataIndicators> stockData, DateTime startDate, int quartile, int periods = 40)
+        {
+            if (quartile < 1 || quartile > 3)
+            {
+                throw new ArgumentException("Quartile must be between 1 and 3.");
+            }
+
+            var selectedPeriodData = stockData
+                .Where(candle => candle.Date <= startDate)
+                .OrderByDescending(candle => candle.Date)
+                .Take(periods)
+                .Select(candle => candle.Volume)
+                .OrderBy(volume => volume)
+                .ToList();
+
+            if (selectedPeriodData.Count < periods)
+            {
+                throw new ArgumentException("Not enough data to calculate the volume quartiles.");
+            }
+
+            int index = (int)Math.Ceiling(quartile * (selectedPeriodData.Count / 4.0)) - 1;
+            return selectedPeriodData[index];
         }
     }
 }
