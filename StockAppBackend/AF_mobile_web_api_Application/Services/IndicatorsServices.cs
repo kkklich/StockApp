@@ -3,7 +3,6 @@ using AF_mobile_web_api_Application.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -169,7 +168,6 @@ namespace AF_mobile_web_api_Application.Services
             return selectedPeriodData[index];
         }
               
-
         public bool IsBullishEngulfing(StockDataIndicators previousDay, StockDataIndicators currentDay)
         {
             // Check if the current day is bullish (close > open)

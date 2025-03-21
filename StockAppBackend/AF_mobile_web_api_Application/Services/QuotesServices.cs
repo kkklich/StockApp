@@ -1,5 +1,6 @@
 ﻿using AF_mobile_web_api.Helpers;
 using AF_mobile_web_api_Application.DTO;
+using AF_mobile_web_api_Application.DTO.Enums;
 using AF_mobile_web_api_Application.Services.Interfaces;
 using Newtonsoft.Json;
 using System;
@@ -195,6 +196,8 @@ namespace AF_mobile_web_api_Application.Services
                     _indicatorsServices.IsBullishEngulfing(stockData[index - 1], stockData[index])
                     && _indicatorsServices.CalculateAverageVolume(stockData, stockData[index].Date, 5) < stockData[index].Volume
                     ).ToList();
+
+                bullishEngulfingCandles.ForEach(candle => candle.PatternType = PatternTypeEnum.BullishEngulfing);
 
                 return bullishEngulfingCandles;
             }
