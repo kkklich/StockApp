@@ -15,5 +15,7 @@ namespace AF_mobile_web_api_Application.Services.Interfaces
         bool IsHammer(StockDataIndicators candle);
         decimal CalculateVolumeQuartile(List<StockDataIndicators> stockData, DateTime startDate, int quartile, int periods = 40);
         decimal CalculateAverageVolume(List<StockDataIndicators> stockData, DateTime startDate, int periods = 40);
+        bool IsBullishEngulfing(StockDataIndicators previousDay, StockDataIndicators currentDay);
+        bool IsMorningStarToday(StockDataIndicators candle1, StockDataIndicators candle2, StockDataIndicators candle3);
     }
 }

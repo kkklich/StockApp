@@ -77,5 +77,33 @@ namespace AF_mobile_web_api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        
+        [HttpGet("FindBullishEngulfing")]
+        public async Task<IActionResult> FindBullishEngulfing([FromQuery] string prefix, [FromQuery] string interval, [FromQuery] string from = "", [FromQuery] string to = "")
+        {
+            try
+            {
+                var quotes = await _quotesServices.FindBullishEngulfing(prefix, interval, from, to);
+                return Ok(quotes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        
+        [HttpGet("FindMorningStar")]
+        public async Task<IActionResult> FindMorningStar([FromQuery] string prefix, [FromQuery] string interval, [FromQuery] string from = "", [FromQuery] string to = "")
+        {
+            try
+            {
+                var quotes = await _quotesServices.FindMornigStar(prefix, interval, from, to);
+                return Ok(quotes);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

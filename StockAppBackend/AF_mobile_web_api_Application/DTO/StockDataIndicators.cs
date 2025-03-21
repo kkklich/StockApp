@@ -16,5 +16,6 @@ namespace AF_mobile_web_api_Application.DTO
         public decimal Open { get; set; }
         public decimal EMA { get; set; }
         public bool IsBackgroundUp { get; set; }
+        public string PatternType { get; set; }
     }
 }

@@ -181,7 +181,51 @@ namespace AF_mobile_web_api_Application.Services
             {
                 throw new ArgumentException(ex.Message);
             }
-        }        
+        }   
+        
+        public async Task<List<StockDataIndicators>> FindBullishEngulfing(string symbol, string zoom, string from, string to)
+        {
+            try
+            {
+                var stockData = await GetStockData(symbol, zoom, from, to);
+
+                var bullishEngulfingCandles = stockData
+                    .Where((candle, index) => 
+                    index > 0 &&
+                    _indicatorsServices.IsBullishEngulfing(stockData[index - 1], stockData[index])
+                    && _indicatorsServices.CalculateAverageVolume(stockData, stockData[index].Date, 5) < stockData[index].Volume
+                    ).ToList();
+
+                return bullishEngulfingCandles;
+            }
+            catch(Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+        }
+
+        public async Task<List<StockDataIndicators>> FindMornigStar(string symbol, string zoom, string from, string to)
+        {
+            try
+            {
+                var stockData = await GetStockData(symbol, zoom, from, to);
+
+                var mornigStarCandles = stockData
+                    .Where((candle, index) =>
+                    index > 0 &&
+                    index < stockData.Count - 1 &&
+                    _indicatorsServices.IsMorningStarToday(stockData[index - 1], stockData[index], stockData[index + 1]))
+                    .ToList();
+
+                return mornigStarCandles;
+
+            }    
+            catch(Exception ex)
+            {
+                throw new ArgumentException(ex.Message);
+            }
+        }
+
     
     }
 }
