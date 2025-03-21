@@ -9,8 +9,11 @@ namespace AF_mobile_web_api_Application.Services.Interfaces
 {
     public interface IQuotesServices
     {
-        Task<List<TwistData>> GetStockData(string symbol, string zoom);
+        Task<List<StockDataIndicators>> GetStockData(string symbol, string zoom, string from = "", string to = "");
         Task<List<StockDataIndicators>> GetStockEMA(string symbol, string zoom, int period);
         Task<StockDataIndicators> CheckBackground(string symbol, string zoom, string dateString);
+        Task<List<StockDataIndicators>> FindHammers(string symbol, string zoom, string from, string to);
+        Task<List<StockDataIndicators>> FindBullishEngulfing(string symbol, string zoom, string from, string to);
+        Task<List<StockDataIndicators>> FindMornigStar(string symbol, string zoom, string from, string to);
     }
 }
